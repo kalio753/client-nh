@@ -1,0 +1,7 @@
+export { default as Logo } from "./logo.svg"
+export { default as Work } from "./Work.svg"
+export { default as Paper } from "./Paper.svg"
+export { default as Paper_Negative } from "./Paper_Negative.svg"
+export { default as Star } from "./Star.svg"
+export { default as User } from "./3_User.svg"
+export { default as Logout } from "./Logout.svg"

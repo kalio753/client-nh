@@ -1,10 +1,9 @@
 import "./App.css"
-import Body from "./components/Layouts/Dsvb_user"
 
 function App() {
     return (
         <div>
-            <Body />
+            <h1 style={{ color: "white" }}>Hello KALIO</h1>
         </div>
     )
 }

@@ -45,6 +45,11 @@ html *::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
 }
 
+.layout_container {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
 button,
 input,
 [tabindex] {
@@ -66,4 +71,11 @@ h6 {
     margin: 0;
     padding: 0;
     line-height: normal;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eee;
+    width: 100%;
+    margin-bottom: 16px;
 }

@@ -1,0 +1,22 @@
+.doc_detail_content_add_modal {
+    .section_list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .supervisor_section {
+            div {
+                margin-bottom: 4px;
+            }
+            .supervisor_select {
+            }
+        }
+    }
+
+    .title_section {
+    }
+
+    .more_btn {
+        align-self: start;
+        padding: 0;
+    }
+}

@@ -1,5 +1,6 @@
 const path = require("path")
 const HTMLWebpackPlugin = require("html-webpack-plugin")
+const dotEnv = require("dotenv-webpack")
 
 module.exports = {
     entry: "./src/index.js",
@@ -7,18 +8,24 @@ module.exports = {
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "bundle.js",
+        publicPath: "/",
     },
 
     plugins: [
         new HTMLWebpackPlugin({
             template: "src/index.html",
         }),
+        new dotEnv(),
     ],
+
+    devServer: {
+        historyApiFallback: true,
+    },
 
     module: {
         rules: [
             {
-                test: /.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
@@ -30,6 +37,7 @@ module.exports = {
                     },
                 },
             },
+
             {
                 test: /\.s[ac]ss$/i,
                 use: ["style-loader", "css-loader", "sass-loader"],
@@ -50,5 +58,9 @@ module.exports = {
                 ],
             },
         ],
+    },
+
+    resolve: {
+        extensions: [".js", ".jsx"],
     },
 }

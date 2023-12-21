@@ -1,0 +1,32 @@
+.doc_container {
+    .top_section {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 20px;
+        align-items: center;
+    }
+
+    .table_section {
+        margin: auto;
+        margin-left: 16px;
+        margin-right: 16px;
+        // padding-bottom: 16px;
+
+        .ant-table {
+            border-radius: 8px;
+
+            .ant-table-thead > tr > th {
+                // background: #ccc;
+                // color: #fff;
+            }
+
+            .action_link {
+                color: #53c100;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

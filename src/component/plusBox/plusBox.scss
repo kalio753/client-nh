@@ -1,0 +1,27 @@
+.plus_btn {
+    border: 2px #53c100 dashed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 4px;
+    flex-direction: column;
+    opacity: 0.6;
+
+    .anticon-plus {
+        margin: 16px 0 6px;
+        font-size: 28px;
+        color: #53c100;
+    }
+
+    .plus_btn_sub {
+        font-size: 16px;
+        color: #53c100;
+        margin-bottom: 16px;
+        // font-weight: bold;
+    }
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+}

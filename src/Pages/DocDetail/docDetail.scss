@@ -1,0 +1,42 @@
+.doc_detail_container {
+    padding: 16px 20px;
+
+    .top_section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+    }
+
+    .update_section {
+        margin: 0 16px;
+
+        .doc_title_input {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+
+            textarea {
+                font-weight: bold;
+                min-height: 48px !important;
+                line-height: 36px;
+                font-size: 18px;
+                width: 50%;
+            }
+        }
+    }
+    .action_section {
+        margin-top: 32px;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+
+        button {
+            width: 15%;
+            height: 36px;
+        }
+    }
+}

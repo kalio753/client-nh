@@ -1,0 +1,46 @@
+.doc_create_container,
+.doc_detail_container {
+    .content_list {
+        margin-bottom: 32px;
+        .content {
+            border: 2px dotted #ccc;
+            padding: 8px 4px;
+            margin-bottom: 16px;
+            &_header {
+                margin: 8px 16px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &_left {
+                    display: flex;
+                    align-items: end;
+                    gap: 8px;
+                    span {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+
+    .content_blank {
+        margin-top: 32px;
+        text-align: center;
+        font-size: 15px;
+    }
+}
+
+.editable-table {
+    .ant-table-thead {
+        .ant-table-cell {
+            // background-color: #eee;
+        }
+    }
+    .ant-table-expanded-row {
+        margin-bottom: 8px;
+        > .ant-table-cell:last-child {
+            border-bottom: 1px solid #aaa;
+        }
+    }
+}

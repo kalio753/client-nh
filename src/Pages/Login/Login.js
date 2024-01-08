@@ -5,6 +5,7 @@ import loginImg from "../../images/login.jpg"
 import logoImg from "../../images/logo.png"
 import myAxios from "../../utils/axios"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export default function Login() {
     const navigate = useNavigate()
@@ -12,6 +13,7 @@ export default function Login() {
     const [password, setPassword] = useState()
     const [errorMsg, setErrorMsg] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
 
     async function loginBtnClick() {
         const phoneNumberRegex = /^\d{10}$/
@@ -22,13 +24,20 @@ export default function Login() {
         } else {
             try {
                 setIsLoading(true)
-                const res = await myAxios.post("/user/login", {
-                    phone: username,
-                    password,
-                })
+                const res = await axios.post(
+                    `${process.env.BACKEND_URL}/user/login`,
+                    {
+                        phone: username,
+                        password,
+                    },
+                )
                 if (res.data?.status === "success") {
                     // Navigate to home page
-                    navigate("/")
+                    document.cookie = `token=${res.data.data.token}; path=/; `
+                    myAxios.defaults.headers.common[
+                        "Authorization"
+                    ] = `Bearer ${res.data.data.token}`
+                    setTimeout(() => navigate("/"), 800)
                 }
             } catch (error) {
                 setIsLoading(false)

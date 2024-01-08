@@ -1,12 +1,15 @@
+import React from "react"
 import { Breadcrumb, Button, Input, Table } from "antd"
-import "./home.scss"
-import { SearchOutlined } from "@ant-design/icons"
+import { SearchOutlined, PlusOutlined } from "@ant-design/icons"
 import { useMyContext } from "../../hooks/myContext"
 import columns from "./tableColumns"
 import { useEffect, useState } from "react"
 import { convertVietnamese } from "../../utils/convertVietnamese"
+import { Link, useNavigate } from "react-router-dom"
+import "./userList.scss"
 
-function Home() {
+export default function UserList() {
+    const navigate = useNavigate()
     const [searchInput, setSearchInput] = useState("")
     const [tableData, setTableData] = useState([])
     const [searchData, setSearchData] = useState()
@@ -46,14 +49,28 @@ function Home() {
                     margin: "16px 0",
                 }}
             >
-                <Breadcrumb.Item>Mọi người</Breadcrumb.Item>
-                <Breadcrumb.Item>Điểm thi đua</Breadcrumb.Item>
+                <Breadcrumb.Item>Aministrator</Breadcrumb.Item>
+                <Breadcrumb.Item>Quản lý User</Breadcrumb.Item>
+                <Breadcrumb.Item>Cập nhật User</Breadcrumb.Item>
             </Breadcrumb>
             <div
-                className="layout_container home_container"
+                className="layout_container user_list_container"
                 style={{ flex: 1 }}
             >
-                <h1 style={{ color: "black" }}>Điểm thi đua chung</h1>
+                <div className="top_section">
+                    <h1 style={{ color: "black" }}>Cập nhật User</h1>
+                    <Link to={"/user/create"}>
+                        <Button
+                            type="primary"
+                            icon={<PlusOutlined />}
+                            size="medium"
+                        >
+                            Cấp tài khoản mới
+                        </Button>
+                    </Link>
+                </div>
+
+                <div className="divider"></div>
 
                 <div className="search_section">
                     <Input
@@ -95,5 +112,3 @@ function Home() {
         </div>
     )
 }
-
-export default Home

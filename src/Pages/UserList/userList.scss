@@ -1,20 +1,27 @@
-.home_container {
-    padding: 16px;
-
-    h1 {
-        margin-bottom: 16px;
+.user_list_container {
+    .top_section {
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .search_section {
         display: flex;
+        margin: 16px;
 
         input {
             width: 25%;
             margin-right: 8px;
         }
     }
+
     .table_section {
-        margin-top: 16px;
+        margin: auto;
+        margin-left: 16px;
+        margin-right: 16px;
+        // padding-bottom: 16px;
+
         .ant-table {
             border-radius: 8px;
 

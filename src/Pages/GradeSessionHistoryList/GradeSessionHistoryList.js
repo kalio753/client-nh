@@ -1,26 +1,32 @@
 import { Breadcrumb, Button, Table } from "antd"
 import React, { useEffect, useState } from "react"
-import { PlusOutlined } from "@ant-design/icons"
 
-import "./document.scss"
 import columns from "./tableColumns"
-import { Link } from "react-router-dom"
 import myAxios from "../../utils/axios"
+import decodeJWT from "../../utils/decodeJWTToken"
+import getCookie from "../../utils/getCookie"
+import timeSince from "../../utils/timeSince"
 
-export default function Document() {
+export default function GradeSessionHistoryList() {
     const [doc, setDoc] = useState()
     const tableData = doc?.map((item) => {
         return {
             name: item.name,
             key: item._id,
-            year: new Date(item.created_at).getFullYear(),
+            year: timeSince(new Date(item.created_at)),
         }
     })
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await myAxios.get("/docs")
+                const user = decodeJWT(getCookie("token"))
+                const user_id = user.data._id
+                const res = await myAxios.post(`grade/supervisor`, {
+                    user_id,
+                    is_history: true,
+                })
+                console.log(res)
                 res.status === 200 ? setDoc(res.data.data) : null
             } catch (error) {
                 console.log(error)
@@ -36,21 +42,12 @@ export default function Document() {
                     margin: "16px 0",
                 }}
             >
-                <Breadcrumb.Item>Administrator</Breadcrumb.Item>
-                <Breadcrumb.Item>Cập nhật tài liệu</Breadcrumb.Item>
+                <Breadcrumb.Item>Công việc của tôi</Breadcrumb.Item>
+                <Breadcrumb.Item>Lịch sử chấm điểm</Breadcrumb.Item>
             </Breadcrumb>
             <div className="layout_container doc_container" style={{ flex: 1 }}>
                 <div className="top_section">
-                    <h1 style={{ color: "black" }}>Tất cả tài liệu</h1>
-                    <Link to={"/docs/create"}>
-                        <Button
-                            type="primary"
-                            icon={<PlusOutlined />}
-                            size="medium"
-                        >
-                            Tạo tài liệu
-                        </Button>
-                    </Link>
+                    <h1 style={{ color: "black" }}>Danh sách đã chấm</h1>
                 </div>
 
                 <div className="divider"></div>

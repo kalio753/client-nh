@@ -1,26 +1,27 @@
-import { Breadcrumb, Button, Table } from "antd"
+import { Breadcrumb, Table } from "antd"
 import React, { useEffect, useState } from "react"
-import { PlusOutlined } from "@ant-design/icons"
 
-import "./document.scss"
 import columns from "./tableColumns"
-import { Link } from "react-router-dom"
 import myAxios from "../../utils/axios"
+import timeSince from "../../utils/timeSince"
+import getCookie from "../../utils/getCookie"
+import decodeJWT from "../../utils/decodeJWTToken"
 
-export default function Document() {
+export default function GradeSelfHistory() {
     const [doc, setDoc] = useState()
     const tableData = doc?.map((item) => {
         return {
             name: item.name,
             key: item._id,
-            year: new Date(item.created_at).getFullYear(),
+            created_at: timeSince(new Date(item.created_at)),
         }
     })
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await myAxios.get("/docs")
+                const user_id = decodeJWT(getCookie("token")).data._id
+                const res = await myAxios.get(`/grade/owner/${user_id}`)
                 res.status === 200 ? setDoc(res.data.data) : null
             } catch (error) {
                 console.log(error)
@@ -36,21 +37,12 @@ export default function Document() {
                     margin: "16px 0",
                 }}
             >
-                <Breadcrumb.Item>Administrator</Breadcrumb.Item>
-                <Breadcrumb.Item>Cập nhật tài liệu</Breadcrumb.Item>
+                <Breadcrumb.Item>Điểm của tôi</Breadcrumb.Item>
+                <Breadcrumb.Item>Lịch sử chấm điểm</Breadcrumb.Item>
             </Breadcrumb>
             <div className="layout_container doc_container" style={{ flex: 1 }}>
                 <div className="top_section">
-                    <h1 style={{ color: "black" }}>Tất cả tài liệu</h1>
-                    <Link to={"/docs/create"}>
-                        <Button
-                            type="primary"
-                            icon={<PlusOutlined />}
-                            size="medium"
-                        >
-                            Tạo tài liệu
-                        </Button>
-                    </Link>
+                    <h1 style={{ color: "black" }}>Lịch sử chấm điểm</h1>
                 </div>
 
                 <div className="divider"></div>

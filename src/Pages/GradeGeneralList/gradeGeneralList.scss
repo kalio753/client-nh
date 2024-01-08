@@ -1,20 +1,17 @@
-.home_container {
-    padding: 16px;
-
-    h1 {
-        margin-bottom: 16px;
-    }
-
-    .search_section {
+.grade_general_container {
+    .top_section {
         display: flex;
-
-        input {
-            width: 25%;
-            margin-right: 8px;
-        }
+        justify-content: space-between;
+        padding: 16px 20px;
+        align-items: center;
     }
+
     .table_section {
-        margin-top: 16px;
+        margin: auto;
+        margin-left: 16px;
+        margin-right: 16px;
+        // padding-bottom: 16px;
+
         .ant-table {
             border-radius: 8px;
 

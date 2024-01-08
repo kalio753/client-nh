@@ -1,0 +1,10 @@
+.user_detail_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 136px);
+
+    #user_detail {
+        width: 39%;
+    }
+}

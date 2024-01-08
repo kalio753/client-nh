@@ -4,9 +4,9 @@ import { Breadcrumb, Button, Input, notification } from "antd"
 import { useNavigate } from "react-router-dom"
 import PlusBox from "../../component/plusBox/PlusBox"
 import DocumentContentTitleAdd from "../../component/modals/DocumentContentTitleAdd"
-import ContentSection from "../../component/contentSection/ContentSection"
 import myAxios from "../../utils/axios"
 import PopUpModal from "../../component/modals/PopUpModal"
+import DocumentContentSection from "../../component/contentSection/DocumentContentSection"
 const { TextArea } = Input
 
 export default function DocCreate() {
@@ -49,13 +49,16 @@ export default function DocCreate() {
         setIsCancelModalOpen(true)
     }
     const handleCancelModal = () => {
-        navigate("/docs")
+        navigate(-1)
     }
 
-    const handleCreateDocument = async () => {
-        const nullSupervisor = doc.section.every((section) =>
-            section.content.some((content) => content.supervisor === ""),
-        )
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+    const showCreateModal = () => {
+        const nullSupervisor = doc.section
+            .map((section) =>
+                section.content.map((content) => content.supervisor),
+            )
+            .some((value) => value.includes(""))
 
         if (title === "") {
             toastApi.error({
@@ -77,29 +80,47 @@ export default function DocCreate() {
                 placement: "top",
             })
         } else {
-            try {
-                setisLoading(true)
-                const response = await myAxios.post("docs/add", doc)
-                if (response.data.status === "success") {
-                    setisLoading(false)
-                    toastApi.success({
-                        message: `Tạo tài liệu thành công`,
-                        description:
-                            "Tạo tài liệu thành công, đang chuyển về trang trước",
-                        placement: "top",
-                    })
-                    navigate("/docs")
-                }
-            } catch (error) {
-                console.error(error)
-                setisLoading(false)
-                toastApi.error({
-                    message: `Tạo tài liệu thất bại`,
-                    description: error,
+            setIsCreateModalOpen(true)
+        }
+    }
+
+    const handleCreateDocument = async () => {
+        try {
+            setisLoading(true)
+            const supervisor_list = doc.section.map((section) => {
+                return section.content.reduce((acc, section) => {
+                    return acc.includes(section.supervisor)
+                        ? acc
+                        : [...acc, section.supervisor]
+                }, [])
+            })
+
+            const response = await myAxios.post("docs/add", {
+                ...doc,
+                last_key: count,
+                supervisor_list: supervisor_list[0],
+            })
+            if (response.data.status === "success") {
+                toastApi.success({
+                    message: `Tạo tài liệu thành công`,
+                    description:
+                        "Tạo tài liệu thành công, đang chuyển về trang trước",
                     placement: "top",
                 })
+                setTimeout(() => {
+                    navigate("/docs")
+                }, 2000)
             }
+        } catch (error) {
+            console.error(error)
+            setisLoading(false)
+            toastApi.error({
+                message: `Tạo tài liệu thất bại`,
+                description: error.response.data.msg,
+                placement: "top",
+            })
         }
+
         console.log(doc)
     }
 
@@ -112,7 +133,9 @@ export default function DocCreate() {
                 }}
             >
                 <Breadcrumb.Item>Administrator</Breadcrumb.Item>
-                <Breadcrumb.Item>Cập nhật tài liệu</Breadcrumb.Item>
+                <Breadcrumb.Item onClick={() => navigate(-1)}>
+                    Cập nhật tài liệu
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>Tài liệu mới</Breadcrumb.Item>
             </Breadcrumb>
             <div
@@ -140,7 +163,7 @@ export default function DocCreate() {
                         />
                     </div>
 
-                    <ContentSection
+                    <DocumentContentSection
                         doc={doc}
                         setDocument={setDocument}
                         count={count}
@@ -161,7 +184,7 @@ export default function DocCreate() {
                     <Button
                         type="primary"
                         block
-                        onClick={handleCreateDocument}
+                        onClick={showCreateModal}
                         loading={isLoading}
                     >
                         Hoàn thành
@@ -183,6 +206,15 @@ export default function DocCreate() {
                 isDanger={true}
                 content="Hủy bỏ tài liệu này và quay lại trang trước?"
                 title="Xác nhận hủy"
+            />
+
+            <PopUpModal
+                isOpen={isCreateModalOpen}
+                setIsOpen={setIsCreateModalOpen}
+                handleOk={handleCreateDocument}
+                isDanger={false}
+                content="Bạn đã chắc chắn các nội dung trên đã chính xác?"
+                title="Xác nhận lưu tài liệu"
             />
         </>
     )

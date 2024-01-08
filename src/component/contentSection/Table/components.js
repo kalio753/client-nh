@@ -104,6 +104,7 @@ const EditableCell = ({
                     <Select
                         defaultValue={record.supervisor}
                         placeholder={"Chọn người phụ trách"}
+                        status={`${record.supervisor ? "" : "error"}`}
                         style={{
                             width: "68%",
                         }}

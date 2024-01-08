@@ -5,16 +5,19 @@ import EditableTable from "./Table/EditableTable"
 import intToRoman from "../../utils/intToRoman"
 import "./contentSection.scss"
 import myAxios from "../../utils/axios"
+import { useMyContext } from "../../hooks/myContext"
 
-export default function ContentSection({ doc, setDocument, count, setCount }) {
-    const [roles, setRoles] = useState([])
+export default function DocumentContentSection({
+    doc,
+    setDocument,
+    count,
+    setCount,
+}) {
+    const [roles, setRoles] = useState(role_list)
+    const { role_list } = useMyContext()
     useEffect(() => {
-        async function fetchData() {
-            const res = await myAxios.get("/role")
-            setRoles(res.data.data)
-        }
-        fetchData()
-    }, [])
+        setRoles(role_list)
+    }, [role_list])
 
     const handleAdd = (title) => {
         setCount(count + 1)

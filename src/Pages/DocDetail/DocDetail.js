@@ -6,9 +6,9 @@ import { Breadcrumb, Button, Input, Modal, Table, notification } from "antd"
 import { DeleteFilled, PlusOutlined } from "@ant-design/icons"
 import PlusBox from "../../component/plusBox/PlusBox"
 import DocumentContentTitleAdd from "../../component/modals/DocumentContentTitleAdd"
-import ContentSection from "../../component/contentSection/ContentSection"
 import myAxios from "../../utils/axios"
 import PopUpModal from "../../component/modals/PopUpModal"
+import DocumentContentSection from "../../component/contentSection/DocumentContentSection"
 const { TextArea } = Input
 
 export default function DocDetail() {
@@ -26,6 +26,7 @@ export default function DocDetail() {
             const res = await myAxios.get(`/docs/${docId}`)
             setDocument(res.data.data)
             setTitle(res.data.data.name)
+            setCount(res.data.data.last_key)
         }
         fetchData()
     }, [])
@@ -43,10 +44,17 @@ export default function DocDetail() {
         setIsCancelModalOpen(true)
     }
     const handleCancelModal = () => {
-        navigate("/docs")
+        navigate(-1)
     }
 
-    const handleUpdateDocument = async () => {
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+    const showCreateModal = () => {
+        const nullSupervisor = doc.section
+            .map((section) =>
+                section.content.map((content) => content.supervisor),
+            )
+            .some((value) => value.includes(""))
+
         if (title === "") {
             toastApi.error({
                 message: `Vui lòng nhập tên tài liệu`,
@@ -59,33 +67,59 @@ export default function DocDetail() {
                 description: "Tài liệu không được rỗng, cần có nội dung",
                 placement: "top",
             })
+        } else if (nullSupervisor) {
+            toastApi.error({
+                message: `Vui lòng chọn người phụ trách`,
+                description:
+                    "Chưa chọn người phụ trách cho một hoặc một số nội dung",
+                placement: "top",
+            })
         } else {
-            try {
-                setisLoading(true)
-                const response = await myAxios.post(
-                    `docs/update/${doc._id}`,
-                    doc,
-                )
-                if (response.data.status === "success") {
-                    setisLoading(false)
-                    toastApi.success({
-                        message: `Cập nhật tài liệu thành công`,
-                        description:
-                            "Cập nhật tài liệu thành công, đang chuyển về trang trước",
-                        placement: "top",
-                    })
-                    navigate("/docs")
-                }
-            } catch (error) {
-                console.error(error)
+            setIsCreateModalOpen(true)
+        }
+    }
+
+    const handleUpdateDocument = async () => {
+        try {
+            const nested_supervisor_list = doc.section.map((section) => {
+                return section.content.reduce((acc, section) => {
+                    return acc.includes(section.supervisor)
+                        ? acc
+                        : [...acc, section.supervisor]
+                }, [])
+            })
+            const supervisor_list = [...new Set(nested_supervisor_list.flat())]
+            console.log("supervisor_list", supervisor_list)
+            setisLoading(true)
+            const response = await myAxios.post(`docs/update/${doc._id}`, {
+                ...doc,
+                last_key: count,
+                supervisor_list: supervisor_list,
+            })
+            if (response.data.status === "success") {
                 setisLoading(false)
-                toastApi.error({
-                    message: `Cập nhật tài liệu thất bại`,
-                    description: error,
+                toastApi.success({
+                    message: `Cập nhật tài liệu thành công`,
+                    description:
+                        "Cập nhật tài liệu thành công, đang chuyển về trang trước",
                     placement: "top",
                 })
+                navigate("/docs")
             }
+        } catch (error) {
+            console.error(error)
+            setisLoading(false)
+            toastApi.error({
+                message: `Cập nhật tài liệu thất bại`,
+                description: error,
+                placement: "top",
+            })
         }
+    }
+
+    const [isDeleteDocumentOpen, setIsDeleteDocumentOpen] = useState(false)
+    const showDeleteModal = () => {
+        setIsDeleteDocumentOpen(true)
     }
 
     const handleDeleteDocument = async () => {
@@ -122,7 +156,9 @@ export default function DocDetail() {
                 }}
             >
                 <Breadcrumb.Item>Administrator</Breadcrumb.Item>
-                <Breadcrumb.Item>Cập nhật tài liệu</Breadcrumb.Item>
+                <Breadcrumb.Item onClick={() => navigate(-1)}>
+                    Cập nhật tài liệu
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>Tài liệu {doc?.name}</Breadcrumb.Item>
             </Breadcrumb>
             <div
@@ -136,7 +172,7 @@ export default function DocDetail() {
                         danger
                         icon={<DeleteFilled />}
                         size="medium"
-                        onClick={handleDeleteDocument}
+                        onClick={showDeleteModal}
                     >
                         Xóa tài liệu
                     </Button>
@@ -159,7 +195,7 @@ export default function DocDetail() {
                         />
                     </div>
 
-                    <ContentSection
+                    <DocumentContentSection
                         doc={doc}
                         setDocument={setDocument}
                         count={count}
@@ -180,7 +216,7 @@ export default function DocDetail() {
                     <Button
                         type="primary"
                         block
-                        onClick={handleUpdateDocument}
+                        onClick={showCreateModal}
                         loading={isLoading}
                     >
                         Cập nhật
@@ -200,8 +236,26 @@ export default function DocDetail() {
                 setIsOpen={setIsCancelModalOpen}
                 handleOk={handleCancelModal}
                 isDanger={true}
-                content="Hủy bỏ tài liệu này và quay lại trang trước?"
+                content="Hủy bỏ việc cập nhật và quay lại trang trước?"
                 title="Xác nhận hủy"
+            />
+
+            <PopUpModal
+                isOpen={isDeleteDocumentOpen}
+                setIsOpen={setIsDeleteDocumentOpen}
+                handleOk={handleDeleteDocument}
+                isDanger={true}
+                content="Xóa bỏ tài liệu này vĩnh viễn?"
+                title="Xác nhận xóa tài liệu"
+            />
+
+            <PopUpModal
+                isOpen={isCreateModalOpen}
+                setIsOpen={setIsCreateModalOpen}
+                handleOk={handleUpdateDocument}
+                isDanger={false}
+                content="Bạn đã chắc chắn các nội dung trên đã chính xác?"
+                title="Xác nhận lưu tài liệu"
             />
         </>
     )

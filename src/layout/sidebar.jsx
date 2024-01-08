@@ -1,39 +1,59 @@
 import React, { useState } from "react"
 import {
-    DesktopOutlined,
-    FileOutlined,
-    PieChartOutlined,
-    TeamOutlined,
-    UserOutlined,
     SearchOutlined,
     AppstoreOutlined,
     StarOutlined,
     FormOutlined,
 } from "@ant-design/icons"
-import { Breadcrumb, Layout, Menu, theme } from "antd"
+import { Layout, Menu, theme } from "antd"
 import { Outlet, useNavigate } from "react-router-dom"
 import logoImg from "../images/logo.png"
+import decodeJWT from "../utils/decodeJWTToken"
+import getCookie from "../utils/getCookie"
+import { useMyContext } from "../hooks/myContext"
 
-const { Header, Content, Footer, Sider } = Layout
+const { Header, Content, Sider } = Layout
 function getItem(label, key, icon, children) {
     return {
         key,
         icon,
         children,
         label,
+        danger: key === "9" ? "true" : undefined,
     }
 }
-const items = [
-    getItem("Mọi người", "1", <SearchOutlined />),
-    getItem("Điểm của tôi", "2", <AppstoreOutlined />),
-    getItem("Administrator", "sub1", <StarOutlined />, [
-        getItem("Cập nhật tài liệu", "3"),
-        getItem("Cập nhật User", "4"),
-        getItem("Điểm HĐTĐ", "5"),
-    ]),
-    getItem("Công việc của tôi", "6", <FormOutlined />),
-]
+
 const Sidebar = () => {
+    const { role_list } = useMyContext()
+    let roleIdToRank = {}
+    for (const role of role_list) {
+        const key = role["_id"]
+        roleIdToRank[key] = role.rank
+    }
+
+    const currUser = decodeJWT(getCookie("token")).data
+    const roleRankList = [currUser.role_id.map((item) => roleIdToRank[item])]
+    console.log("Sidebar log", currUser)
+    console.log("Sidebar log", roleRankList)
+    const items = [
+        roleRankList[0].includes(0) &&
+            getItem("Administrator", "sub1", <StarOutlined />, [
+                getItem("Cập nhật tài liệu", "1"),
+                getItem("Quản lý User", "2"),
+                getItem("Điểm HĐTĐ", "3"),
+            ]),
+        getItem("Mọi người", "4", <SearchOutlined />),
+        getItem("Điểm của tôi", "sub2", <AppstoreOutlined />, [
+            getItem("Chấm điểm", "5"),
+            getItem("Lịch sử", "6"),
+        ]),
+        !roleRankList[0].includes(12) &&
+            getItem("Công việc của tôi", "sub3", <FormOutlined />, [
+                getItem("Chấm điểm", "7"),
+                getItem("Lịch sử", "8"),
+            ]),
+        getItem("Đăng xuất", "9"),
+    ]
     const navigate = useNavigate()
     const [collapsed, setCollapsed] = useState(false)
     const {
@@ -45,18 +65,32 @@ const Sidebar = () => {
         const key = e.key
         switch (key) {
             case "1":
-                navigate("/")
-                break
-            case "2":
-                break
-            case "3":
                 navigate("/docs")
                 break
+            case "2":
+                navigate("/user")
+                break
+            case "3":
+                break
             case "4":
+                navigate("/")
                 break
             case "5":
+                navigate("/grade")
                 break
             case "6":
+                navigate("/grade/history")
+                break
+            case "7":
+                navigate("/grade/supervisor")
+                break
+            case "8":
+                navigate("/grade/supervisor/history")
+                break
+            case "9":
+                navigate("/login")
+                document.cookie =
+                    "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
                 break
             default:
                 break
@@ -90,8 +124,8 @@ const Sidebar = () => {
                 </div>
                 <Menu
                     theme="dark"
-                    defaultSelectedKeys={["1"]}
-                    defaultOpenKeys={["sub1"]}
+                    defaultSelectedKeys={["4"]}
+                    defaultOpenKeys={["sub1", "sub2", "sub3"]}
                     mode="inline"
                     items={items}
                     onClick={handleMenuItemClicked}
@@ -102,8 +136,16 @@ const Sidebar = () => {
                     style={{
                         padding: 0,
                         background: colorBgContainer,
+                        display: "flex",
+                        justifyContent: "end",
+                        paddingRight: 24,
                     }}
-                />
+                >
+                    Xin chào,{" "}
+                    <span style={{ fontWeight: 500, marginLeft: 4 }}>
+                        {currUser.name}
+                    </span>
+                </Header>
                 <Content
                     style={{
                         margin: "0 16px",

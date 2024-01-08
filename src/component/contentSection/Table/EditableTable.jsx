@@ -51,6 +51,7 @@ export default function EditableTable({
                             parentKey: key,
                             name: `Sub criteria ${count + 1}`,
                             point: 15,
+                            supervisor: content.supervisor,
                         }),
                     }
                 } else return { ...content }

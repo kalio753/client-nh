@@ -22,6 +22,7 @@ import GradeGeneralDetail from "./Pages/GradeGeneralDetail/GradeGeneralDetail.js
 import UserList from "./Pages/UserList/UserList.js"
 import UserDetail from "./Pages/UserDetail/UserDetail.js"
 import UserCreate from "./Pages/UserCreate/UserCreate.js"
+import ChangePassword from "./Pages/ChangePassword/ChangePassword.js"
 
 function App() {
     return (
@@ -82,6 +83,10 @@ function App() {
                         ></Route>
                         <Route path="create" element={<UserCreate />}></Route>
                     </Route>
+                    <Route
+                        path="change_password"
+                        element={<ChangePassword />}
+                    ></Route>
                     {/* <Route path="*" element={<NoPage />} /> */}
                 </Route>
             </Route>

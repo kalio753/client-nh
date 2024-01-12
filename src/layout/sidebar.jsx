@@ -4,6 +4,7 @@ import {
     AppstoreOutlined,
     StarOutlined,
     FormOutlined,
+    LockOutlined,
 } from "@ant-design/icons"
 import { Layout, Menu, theme } from "antd"
 import { Outlet, useNavigate } from "react-router-dom"
@@ -19,7 +20,7 @@ function getItem(label, key, icon, children) {
         icon,
         children,
         label,
-        danger: key === "9" ? "true" : undefined,
+        danger: key === "10" ? "true" : undefined,
     }
 }
 
@@ -52,7 +53,8 @@ const Sidebar = () => {
                 getItem("Chấm điểm", "7"),
                 getItem("Lịch sử", "8"),
             ]),
-        getItem("Đăng xuất", "9"),
+        getItem("Đổi mật khẩu", "9", <LockOutlined />),
+        getItem("Đăng xuất", "10"),
     ]
     const navigate = useNavigate()
     const [collapsed, setCollapsed] = useState(false)
@@ -88,6 +90,9 @@ const Sidebar = () => {
                 navigate("/grade/supervisor/history")
                 break
             case "9":
+                navigate("/change_password")
+                break
+            case "10":
                 navigate("/login")
                 document.cookie =
                     "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"

@@ -1,13 +1,16 @@
-import { Breadcrumb, Button, Form, Input, Select } from "antd"
-import React from "react"
+import { Breadcrumb, Button, Form, Input, Select, notification } from "antd"
+import React, { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useMyContext } from "../../hooks/myContext"
 import validatePhoneNumber from "../../utils/validatePhoneNumber"
+import myAxios from "../../utils/axios"
 
 export default function UserCreate() {
+    const [toastApi, contextHolder] = notification.useNotification()
     const navigate = useNavigate()
     const { user_list, dept_list, role_list, fetchMyContextData } =
         useMyContext()
+    const [isLoading, setIsLoading] = useState(false)
 
     let dept_dict = {}
     for (const dept of dept_list) {
@@ -20,16 +23,45 @@ export default function UserCreate() {
         role_dict[key] = role.name
     }
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log("Success:", values)
+
+        setIsLoading(true)
+        const res = await myAxios.post("user/signup", {
+            ...values,
+            password: "123123",
+        })
+        if (res.data.status === "success") {
+            toastApi.success({
+                message: `Cấp mới tài khoản thành công`,
+                description: "Đang chuyển về trang trước",
+                placement: "top",
+            })
+            setTimeout(() => {
+                navigate(-1)
+            }, 1500)
+        } else {
+            setIsLoading(false)
+            toastApi.error({
+                message: `Khởi tạo thất bại`,
+                description: "Vui lòng thử lại sau",
+                placement: "top",
+            })
+        }
     }
 
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo)
+        toastApi.error({
+            message: `Khởi tạo thất bại`,
+            description: "Các trường thông tin không được trống",
+            placement: "top",
+        })
     }
 
     return (
         <div>
+            {contextHolder}
             <Breadcrumb
                 style={{
                     margin: "16px 0",
@@ -121,7 +153,7 @@ export default function UserCreate() {
                         rules={[
                             {
                                 required: true,
-                                message: "Hãy chọn ít nhất một chức vụ",
+                                message: "Hãy chọn ít nhất 1 chức vụ",
                             },
                         ]}
                     >
@@ -149,7 +181,11 @@ export default function UserCreate() {
                         >
                             Trở lại
                         </Button>
-                        <Button type="primary" htmlType="submit">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            loading={isLoading}
+                        >
                             Khởi tạo
                         </Button>
                     </Form.Item>

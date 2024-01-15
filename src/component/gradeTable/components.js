@@ -88,7 +88,7 @@ const EditableCell = ({
                 style={{
                     paddingRight: 24,
                     width: "39%",
-                    color: `${selfPoint > maxOrMinPoint ? "red" : "black"}`,
+                    // color: `${selfPoint > maxOrMinPoint ? "red" : "black"}`,
                 }}
                 onClick={toggleEdit}
             >

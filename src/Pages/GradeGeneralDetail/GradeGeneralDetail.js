@@ -11,12 +11,12 @@ export default function GradeGeneralDetail() {
     const { gradeId, userId } = useParams()
     const navigate = useNavigate()
 
-    const { user_list } = useMyContext()
-    let user_dict = {}
-    for (const user of user_list) {
-        const key = user["_id"]
-        user_dict[key] = user.name
-    }
+    const { user_list, user_dict } = useMyContext()
+    // let user_dict = {}
+    // for (const user of user_list) {
+    //     const key = user["_id"]
+    //     user_dict[key] = user.name
+    // }
     const userName = user_dict[userId]
 
     const [doc, setDocument] = useState()

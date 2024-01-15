@@ -51,14 +51,18 @@ export default function SupervisorGradeTable({
         }
         return {
             ...col,
-            onCell: (record) => ({
-                record,
-                editable:
-                    col.editable.includes(record.supervisor) && isEditable,
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave,
-            }),
+            onCell: (record) => {
+                const editable =
+                    col.editable.includes(record.supervisor) && isEditable
+
+                return {
+                    record,
+                    editable,
+                    dataIndex: col.dataIndex,
+                    title: col.title,
+                    handleSave,
+                }
+            },
         }
     })
 

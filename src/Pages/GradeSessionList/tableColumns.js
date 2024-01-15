@@ -4,10 +4,16 @@ import { ArrowRightOutlined } from "@ant-design/icons"
 
 const columns = [
     {
+        title: "Giáo viên",
+        dataIndex: "owner",
+        key: "owner",
+        width: "20%",
+    },
+    {
         title: "Tên tài liệu",
         dataIndex: "name",
         key: "name",
-        width: "70%",
+        width: "50%",
         render: (text) => <Link to={"/"}>{text}</Link>,
     },
     {

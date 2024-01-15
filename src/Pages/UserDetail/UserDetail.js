@@ -9,21 +9,18 @@ export default function UserDetail() {
     const { userId } = useParams()
     const [toastApi, contextHolder] = notification.useNotification()
     const navigate = useNavigate()
-    const { user_list, dept_list, role_list, fetchMyContextData } =
-        useMyContext()
+    const {
+        user_list,
+        dept_list,
+        role_list,
+        fetchMyContextData,
+        role_dict,
+        dept_dict,
+    } = useMyContext()
     const [isLoading, setIsLoading] = useState(false)
 
     const currUser = user_list.filter((user) => user._id === userId)[0]
-    let dept_dict = {}
-    for (const dept of dept_list) {
-        const key = dept["_id"]
-        dept_dict[key] = dept.name
-    }
-    let role_dict = {}
-    for (const role of role_list) {
-        const key = role["_id"]
-        role_dict[key] = role.name
-    }
+
     if (currUser) {
         currUser.department = currUser.department_id
         currUser.role = currUser.role_id.map((roleId) => roleId)

@@ -9,6 +9,11 @@ export const MyContextProvider = ({ children }) => {
         role_list: [],
         dept_list: [],
     })
+    const [dictValue, setDictValue] = useState({
+        dept_dict: {},
+        role_dict: {},
+        user_dict: {},
+    })
 
     const fetchMyContextData = async () => {
         try {
@@ -16,6 +21,28 @@ export const MyContextProvider = ({ children }) => {
             const userResponse = await myAxios.get("user/get_all")
             const roleResponse = await myAxios.get("role")
             const deptResponse = await myAxios.get("dept")
+
+            const tmp_dept_dict = {}
+            for (const dept of deptResponse.data.data) {
+                const key = dept["_id"]
+                tmp_dept_dict[key] = dept.name
+            }
+            setDictValue((prev) => ({ ...prev, dept_dict: tmp_dept_dict }))
+
+            const tmp_role_dict = {}
+            for (const role of roleResponse.data.data) {
+                const key = role["_id"]
+                tmp_role_dict[key] = role.name
+            }
+            setDictValue((prev) => ({ ...prev, role_dict: tmp_role_dict }))
+
+            const tmp_user_dict = {}
+            for (const user of userResponse.data.data) {
+                const key = user["_id"]
+                tmp_user_dict[key] = user.name
+            }
+            setDictValue((prev) => ({ ...prev, user_dict: tmp_user_dict }))
+
             setContextValues({
                 user_list: userResponse.data.data,
                 role_list: roleResponse.data.data,
@@ -32,7 +59,13 @@ export const MyContextProvider = ({ children }) => {
     }, [])
 
     return (
-        <MyContext.Provider value={{ ...contextValues, fetchMyContextData }}>
+        <MyContext.Provider
+            value={{
+                ...contextValues,
+                ...dictValue,
+                fetchMyContextData,
+            }}
+        >
             {children}
         </MyContext.Provider>
     )

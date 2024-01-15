@@ -12,17 +12,6 @@ export default function UserCreate() {
         useMyContext()
     const [isLoading, setIsLoading] = useState(false)
 
-    let dept_dict = {}
-    for (const dept of dept_list) {
-        const key = dept["_id"]
-        dept_dict[key] = dept.name
-    }
-    let role_dict = {}
-    for (const role of role_list) {
-        const key = role["_id"]
-        role_dict[key] = role.name
-    }
-
     const onFinish = async (values) => {
         console.log("Success:", values)
 

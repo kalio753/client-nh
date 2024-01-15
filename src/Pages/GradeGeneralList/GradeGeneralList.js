@@ -11,12 +11,12 @@ import "./gradeGeneralList.scss"
 export default function GradeGeneralList() {
     const navigate = useNavigate()
     const { userId } = useParams()
-    const { user_list } = useMyContext()
-    let user_dict = {}
-    for (const user of user_list) {
-        const key = user["_id"]
-        user_dict[key] = user.name
-    }
+    const { user_list, user_dict } = useMyContext()
+    // let user_dict = {}
+    // for (const user of user_list) {
+    //     const key = user["_id"]
+    //     user_dict[key] = user.name
+    // }
     const userName = user_dict[userId]
     const [doc, setDoc] = useState()
     const tableData = doc?.map((item) => {

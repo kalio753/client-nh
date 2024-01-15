@@ -10,18 +10,14 @@ function Home() {
     const [searchInput, setSearchInput] = useState("")
     const [tableData, setTableData] = useState([])
     const [searchData, setSearchData] = useState()
-    const { user_list, dept_list, fetchMyContextData } = useMyContext()
+    const { user_list, dept_list, fetchMyContextData, dept_dict } =
+        useMyContext()
 
     useEffect(() => {
         fetchMyContextData()
     }, [])
 
     useEffect(() => {
-        let dept_dict = {}
-        for (const dept of dept_list) {
-            const key = dept["_id"]
-            dept_dict[key] = dept.name
-        }
         setTableData(
             user_list.map((user) => {
                 return { ...user, department: dept_dict[user.department_id] }

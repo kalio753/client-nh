@@ -54,10 +54,7 @@ function App() {
                         </Route>
                         <Route path="supervisor" element={<IndexFragment />}>
                             <Route index element={<GradeSessionList />} />
-                            <Route
-                                path=":id"
-                                element={<GradeSupervisor isEditable={true} />}
-                            />
+                            <Route path=":id" element={<GradeSupervisor />} />
                             <Route path="history" element={<IndexFragment />}>
                                 <Route
                                     index
@@ -65,9 +62,7 @@ function App() {
                                 />
                                 <Route
                                     path=":id"
-                                    element={
-                                        <GradeSupervisor isEditable={false} />
-                                    }
+                                    element={<GradeSupervisor />}
                                 />
                             </Route>
                         </Route>

@@ -10,8 +10,9 @@ import decodeJWT from "../../utils/decodeJWTToken"
 import getCookie from "../../utils/getCookie"
 import SupervisorGradeTable from "../../component/supervisorGradeTable/SupervisorGradeTable"
 import { useMyContext } from "../../hooks/myContext"
+import { formatedDate, isDateExpired } from "../../utils/dateFormat"
 
-export default function GradeSupervisor({ isEditable }) {
+export default function GradeSupervisor() {
     const { id } = useParams()
     const navigate = useNavigate()
     const currUser = decodeJWT(getCookie("token")).data
@@ -22,7 +23,8 @@ export default function GradeSupervisor({ isEditable }) {
     const [isLoading, setisLoading] = useState(false)
 
     const [doc, setDocument] = useState()
-    console.log("doc ne", doc)
+    console.log("doc", doc)
+    const isEditable = !isDateExpired(doc?.supervisor_expired)
     const userName = user_dict[doc?.owner]
 
     useEffect(() => {
@@ -151,6 +153,11 @@ export default function GradeSupervisor({ isEditable }) {
 
                 <div className="divider"></div>
 
+                <div className="expired_section">
+                    <span>Hạn chót đánh giá: </span>
+                    <h3>{formatedDate(doc?.supervisor_expired)}</h3>
+                </div>
+
                 <div className="grade_section">
                     {doc?.section?.map((docItem, index) => {
                         const tableData = [...docItem.content]
@@ -204,17 +211,7 @@ export default function GradeSupervisor({ isEditable }) {
                             </Button>
                         </>
                     ) : (
-                        <Button
-                            block
-                            danger
-                            onClick={() =>
-                                navigate(
-                                    isEditable
-                                        ? `/grade/history`
-                                        : `/grade/supervisor/history`,
-                                )
-                            }
-                        >
+                        <Button block danger onClick={() => navigate(-1)}>
                             Quay lại
                         </Button>
                     )}

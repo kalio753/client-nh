@@ -129,7 +129,8 @@ export default function SupervisorGradeTable({
                     return {
                         record,
                         editable:
-                            col.editable.includes(supervisor) && isEditable,
+                            col.editable.includes(record.supervisor) &&
+                            isEditable,
                         dataIndex: col.dataIndex,
                         title: col.title,
                         handleSave,

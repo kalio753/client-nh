@@ -310,35 +310,35 @@
                             "parentKey": 26,
                             "key": 48,
                             "point": 14,
-                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                            "supervisor": "6582b155be8b31b0ca5a87bb"
                         },
                         {
                             "name": "Bằng hoặc cao hơn dưới 5%",
                             "parentKey": 26,
                             "key": 49,
                             "point": 10,
-                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                            "supervisor": "6582b155be8b31b0ca5a87bb"
                         },
                         {
                             "name": "Thấp hơn đến 9.9%",
                             "parentKey": 26,
                             "key": 50,
                             "point": 8,
-                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                            "supervisor": "6582b155be8b31b0ca5a87bb"
                         },
                         {
                             "name": "Thấp hơn: 10% - 19.9%",
                             "parentKey": 26,
                             "key": 51,
                             "point": 5,
-                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                            "supervisor": "6582b155be8b31b0ca5a87bb"
                         },
                         {
                             "name": "Thấp hơn: ≥ 20%",
                             "parentKey": 26,
                             "key": 52,
                             "point": 0,
-                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                            "supervisor": "6582b155be8b31b0ca5a87bb"
                         }
                     ],
                     "supervisor": "6582b155be8b31b0ca5a87bb"

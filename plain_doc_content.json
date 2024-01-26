@@ -1,0 +1,698 @@
+{
+    "name": "Phiếu đánh giá thi đua cá nhân giáo viên năm 2023 - 2024",
+    "section": [
+        {
+            "title": "Tư tưởng chính trị",
+            "total_point": 15,
+            "content": [
+                {
+                    "key": 0,
+                    "name": "Chấp hành tốt chủ trương chính sách của Đảng, pháp luật nhà nước",
+                    "point": 5,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87b9"
+                },
+                {
+                    "key": 1,
+                    "name": "Phẩm chức đạo đức tốt, quan hệ tốt với đồng nghiệp, có uy tín với phụ huynh và học sinh; xây dựng tốt khối đoàn kết nội bộ: tác phong, ngôn phong đúng mực, giữ gìn uy tín của tập thể, đồng nghiệp trước phụ huynh, học sinh và xã hội, thực hiện đúng quy tắc ứng xử",
+                    "point": 10,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87b9"
+                },
+                {
+                    "key": 2,
+                    "name": "Có tinh thần tự lực, tự cường, đoàn kết tương trợ, tích cực tham gia các phong trào thi đua, các cuộc vận động của ngành",
+                    "point": 0,
+                    "sub_criteria": [
+                        {
+                            "name": "Nghỉ học chính trị có phép: - điểm/ 1 buổi",
+                            "parentKey": 2,
+                            "key": 3,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Nghỉ học chính trị không phép: - điểm/ 1 buổi",
+                            "parentKey": 2,
+                            "key": 4,
+                            "point": -3,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Không nộp bài thu hoạch (nếu có): - điểm/ 1 lần",
+                            "parentKey": 2,
+                            "key": 6,
+                            "point": -2,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Không tham gia đóng góp các loại quỹ: - điểm/ 1 lần",
+                            "parentKey": 2,
+                            "key": 7,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87bd"
+                }
+            ]
+        },
+        {
+            "title": "Thực hiện nhiệm vụ",
+            "total_point": 79,
+            "content": [
+                {
+                    "key": 8,
+                    "name": "Giáo án đầy đủ, có thể hiện phương pháp mới, hướng dẫn phương pháp tự học cho học sinh: (dựa theo đánh giá kiểm tra giáo án của TTCM, BGH)",
+                    "point": 4,
+                    "sub_criteria": [
+                        {
+                            "name": "Tốt",
+                            "parentKey": 8,
+                            "key": 11,
+                            "point": 4,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        },
+                        {
+                            "name": "Khá",
+                            "parentKey": 8,
+                            "key": 12,
+                            "point": 3,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        },
+                        {
+                            "name": "Đạt yêu cầu",
+                            "parentKey": 8,
+                            "key": 13,
+                            "point": 2,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        },
+                        {
+                            "name": "Không đạt yêu cầu",
+                            "parentKey": 8,
+                            "key": 14,
+                            "point": 0,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 9,
+                    "name": "Đảm bảo tiến độ thực hiện chương trình:",
+                    "point": 4,
+                    "sub_criteria": [
+                        {
+                            "name": "Trễ, sớm 2 tuần, 3 tuần",
+                            "parentKey": 9,
+                            "key": 15,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        },
+                        {
+                            "name": "Trễ, sớm 4 tuần trở lên",
+                            "parentKey": 9,
+                            "key": 16,
+                            "point": -2,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        },
+                        {
+                            "name": "Không sử dụng đồ dùng dạy học đã có (do tổ bộ môn ghi nhận)",
+                            "parentKey": 9,
+                            "key": 17,
+                            "point": -2,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 18,
+                    "name": "Ghi và ký sổ đầu bài đầy đủ, kịp thời:",
+                    "point": 2,
+                    "sub_criteria": [
+                        {
+                            "name": "Thiếu, trễ: - điểm/1 lần",
+                            "parentKey": 18,
+                            "key": 32,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c9"
+                },
+                {
+                    "key": 19,
+                    "name": "Dự giờ: 3 tiết/HK. GV thử việc dự 6 tiết/ HK",
+                    "point": 2,
+                    "sub_criteria": [
+                        {
+                            "name": "Thiếu: - điểm/1 tiết",
+                            "parentKey": 19,
+                            "key": 33,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c9"
+                },
+                {
+                    "key": 20,
+                    "name": "Không đi trễ về sớm, không bỏ tiết, bỏ giờ:",
+                    "point": 6,
+                    "sub_criteria": [
+                        {
+                            "name": "Trễ dưới 5 phút : - điểm/1 lần",
+                            "parentKey": 20,
+                            "key": 34,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Trễ từ 5 phút trở lên : - điểm/1 lần",
+                            "parentKey": 20,
+                            "key": 35,
+                            "point": -2,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Nghỉ có phép có dạy bù hoặc có dạy tương trợ cùng môn : - điểm/1 tiết",
+                            "parentKey": 20,
+                            "key": 36,
+                            "point": 0,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Nghỉ có phép không dạy bù hay không có dạy tương trợ cùng môn: - điểm/1 tiết",
+                            "parentKey": 20,
+                            "key": 37,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Nghỉ không phép: - điểm/1 tiết",
+                            "parentKey": 20,
+                            "key": 38,
+                            "point": -6,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c9"
+                },
+                {
+                    "key": 21,
+                    "name": "Tham gia hội họp đầy đủ, tham dự bồi dưỡng chuyên môn nghiệp vụ theo quy định:",
+                    "point": 4,
+                    "sub_criteria": [
+                        {
+                            "name": " Vắng họp hội đồng, sinh hoạt toàn trường, khai giảng, sơ tổng kết, hội nghị không phép: - điểm/1 lần",
+                            "parentKey": 21,
+                            "key": 39,
+                            "point": -2,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": " Vắng họp hội đồng, sinh hoạt toàn trường, khai giảng, sơ tổng kết, hội nghị có phép: - điểm/1 lần",
+                            "parentKey": 21,
+                            "key": 40,
+                            "point": 0,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Vắng sinh hoạt chuyên môn tổ không phép: - điểm/1 lần",
+                            "parentKey": 21,
+                            "key": 41,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Vắng sinh hoạt chuyên môn tổ có phép: - điểm/1 lần",
+                            "parentKey": 21,
+                            "key": 42,
+                            "point": -0.5,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c1"
+                },
+                {
+                    "key": 22,
+                    "name": "Thực hiện hồ sơ, sổ sách chuyên môn đầy đủ, rõ ràng, cập nhật thường xuyên:",
+                    "point": 4,
+                    "sub_criteria": [
+                        {
+                            "name": " Hoàn thành đầy đủ đúng hạn",
+                            "parentKey": 22,
+                            "key": 43,
+                            "point": 4,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Không hoàn thành:  (thiếu từ 1 hồ sơ hoặc từ 1 hồ sơ không đúng quy định)",
+                            "parentKey": 22,
+                            "key": 44,
+                            "point": -4,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Hoàn thành trễ theo quy định : - điểm/lần",
+                            "parentKey": 22,
+                            "key": 45,
+                            "point": -2,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 23,
+                    "name": "Có chuyên đề chuyên môn thao giảng với nhà trường.",
+                    "point": 4,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 24,
+                    "name": "Có chuyên đề chuyên môn thao giảng với nhà trường ngoại khóa cấp cụm",
+                    "point": 6,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 25,
+                    "name": "Có sáng kiến hoặc kinh nghiệm, giải pháp được phổ biến trong tổ, khối\nhoặc toàn trường, giúp đỡ đồng nghiệp trong chuyên môn, dạy tương trợ",
+                    "point": 4,
+                    "sub_criteria": [
+                        {
+                            "name": " Có sáng kiến (đăng ký thi đua đầu năm)",
+                            "parentKey": 25,
+                            "key": 46,
+                            "point": 2,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Có giải pháp (phải có biên bản tổ ghi nhận, cá nhân phải báo cáo qua tổ bộ môn)",
+                            "parentKey": 25,
+                            "key": 47,
+                            "point": 2,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 26,
+                    "name": "Chất lượng học tập của học sinh đạt yêu cầu (dựa vào tỉ lệ % số bài KTHK trên trung bình của cá nhân so với tỉ lệ % số bài KTHK trên trung bình khối bộ môn): ",
+                    "point": 14,
+                    "sub_criteria": [
+                        {
+                            "name": "Cao hơn: 5% trở lên",
+                            "parentKey": 26,
+                            "key": 48,
+                            "point": 14,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Bằng hoặc cao hơn dưới 5%",
+                            "parentKey": 26,
+                            "key": 49,
+                            "point": 10,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Thấp hơn đến 9.9%",
+                            "parentKey": 26,
+                            "key": 50,
+                            "point": 8,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Thấp hơn: 10% - 19.9%",
+                            "parentKey": 26,
+                            "key": 51,
+                            "point": 5,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Thấp hơn: ≥ 20%",
+                            "parentKey": 26,
+                            "key": 52,
+                            "point": 0,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87bb"
+                },
+                {
+                    "key": 27,
+                    "name": "Thực hiện đổi mới phương pháp dạy học đạt hiệu quả cao: học sinh chủ động, hứng thú học tập, thực hành vận dụng tốt, lớp học sinh động (dựa theo đánh giá trên phiếu dự giờ của giáo viên được BGH và đồng nghiệp đánh giá):",
+                    "point": 10,
+                    "sub_criteria": [
+                        {
+                            "name": "Đăng ký và dạy tiết tốt",
+                            "parentKey": 27,
+                            "key": 53,
+                            "point": 3,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Giáo án điện tử, ứng dụng CNTT trong dạy học, chuyển đổi số.",
+                            "parentKey": 27,
+                            "key": 54,
+                            "point": 4,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Tiết tốt",
+                            "parentKey": 27,
+                            "key": 55,
+                            "point": 3,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Tiết khá",
+                            "parentKey": 27,
+                            "key": 56,
+                            "point": 2,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Tiết đạt yêu cầu",
+                            "parentKey": 27,
+                            "key": 57,
+                            "point": 1,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Tiết không đạt yêu cầu",
+                            "parentKey": 27,
+                            "key": 58,
+                            "point": 0,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 28,
+                    "name": "Chấm sửa, trả bài đúng qui định, đúng thực chất, nộp đề kiểm tra:",
+                    "point": 6,
+                    "sub_criteria": [
+                        {
+                            "name": "Chấm bài thi HK mỗi bài sai lệch hơn 1 điểm (môn XH), 0.5 điểm (môn TN)",
+                            "parentKey": 28,
+                            "key": 59,
+                            "point": -0.5,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Thất lạc bài kiểm tra giữa kỳ, học kỳ",
+                            "parentKey": 28,
+                            "key": 60,
+                            "point": -6,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Nộp đề kiểm tra (định kỳ) trễ 1 ngày/1 lần KT: - điểm/1 lần",
+                            "parentKey": 28,
+                            "key": 61,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Không nộp đề kiểm tra (định kỳ)",
+                            "parentKey": 28,
+                            "key": 62,
+                            "point": -6,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Nộp đề KT (định kỳ) không đúng ma trận thống nhất trong TCM hoặc đề, đáp án sai, thiếu: - điểm/1 lần",
+                            "parentKey": 28,
+                            "key": 63,
+                            "point": -3,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 29,
+                    "name": "Thực hiện đúng, đủ điểm số theo quy định:",
+                    "point": 4,
+                    "sub_criteria": [
+                        {
+                            "name": "Ghi sai điểm ở học bạ từ lỗi thứ 5 trở lên: - điểm/1 lỗi",
+                            "parentKey": 29,
+                            "key": 64,
+                            "point": -0.5,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        },
+                        {
+                            "name": "Sai không sửa: - điểm/1 lỗi",
+                            "parentKey": 29,
+                            "key": 65,
+                            "point": -1,
+                            "supervisor": "6582b155be8b31b0ca5a87b7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c7"
+                },
+                {
+                    "key": 30,
+                    "name": "Tự học nâng cao trình độ chuyên môn, nghiệp vụ, chính trị: Dựa vào kết quả tự bồi dưỡng theo KH cá nhân",
+                    "point": 2,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87c7"
+                },
+                {
+                    "key": 31,
+                    "name": "Tham gia họat động ngoại khóa của nhà trường (nếu có tổ chức)",
+                    "point": 3,
+                    "sub_criteria": [
+                        {
+                            "name": "Tham gia theo kế hoạch tổ đề ra",
+                            "parentKey": 31,
+                            "key": 66,
+                            "point": 1.5,
+                            "supervisor": "6582b155be8b31b0ca5a87c7"
+                        },
+                        {
+                            "name": "Trực tiếp tham gia tại buổi ngoại khóa",
+                            "parentKey": 31,
+                            "key": 67,
+                            "point": 1.5,
+                            "supervisor": "6582b155be8b31b0ca5a87c7"
+                        },
+                        {
+                            "name": "Không tham gia - điểm/lần",
+                            "parentKey": 31,
+                            "key": 68,
+                            "point": -3,
+                            "supervisor": "6582b155be8b31b0ca5a87c7"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c7"
+                }
+            ]
+        },
+        {
+            "title": "Công tác kiêm nhiệm - phong trào",
+            "total_point": 10,
+            "content": [
+                {
+                    "key": 69,
+                    "name": "Công tác kiêm nhiệm:",
+                    "point": 7,
+                    "sub_criteria": [
+                        {
+                            "name": "Xuất sắc",
+                            "parentKey": 69,
+                            "key": 70,
+                            "point": 7,
+                            "supervisor": "6582b155be8b31b0ca5a87c3"
+                        },
+                        {
+                            "name": "Tốt",
+                            "parentKey": 69,
+                            "key": 71,
+                            "point": 6,
+                            "supervisor": "6582b155be8b31b0ca5a87c3"
+                        },
+                        {
+                            "name": "Khá",
+                            "parentKey": 69,
+                            "key": 72,
+                            "point": 5,
+                            "supervisor": "6582b155be8b31b0ca5a87c3"
+                        },
+                        {
+                            "name": "Đạt yêu cầu",
+                            "parentKey": 69,
+                            "key": 73,
+                            "point": 3,
+                            "supervisor": "6582b155be8b31b0ca5a87c3"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c3"
+                },
+                {
+                    "key": 74,
+                    "name": "Tham gia phong trào văn thể mỹ do ngành, cụm, trường phát động (theo bảng thống kê tham gia phong trào của từng đợt thi đua), tham gia chuẩn bị các sự kiện, Lễ, Hội của nhà trường",
+                    "point": 3,
+                    "sub_criteria": [
+                        {
+                            "name": "Cấp Ngành",
+                            "parentKey": 74,
+                            "key": 75,
+                            "point": 3,
+                            "supervisor": "6582b155be8b31b0ca5a87c3"
+                        },
+                        {
+                            "name": "Cấp Cụm",
+                            "parentKey": 74,
+                            "key": 76,
+                            "point": 2,
+                            "supervisor": "6582b155be8b31b0ca5a87c3"
+                        },
+                        {
+                            "name": "Cấp trường (Cho từng đợt)",
+                            "parentKey": 74,
+                            "key": 77,
+                            "point": 1,
+                            "supervisor": "6582b155be8b31b0ca5a87c3"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87c3"
+                }
+            ]
+        },
+        {
+            "title": "Điểm thưởng",
+            "total_point": 31,
+            "content": [
+                {
+                    "key": 78,
+                    "name": "Giáo viên bồi dưỡng HS giỏi TP (Lớp 12),  GV dạy QPAN, TDTT có giải cấp TP, QG - Văn nghệ, HSG máy tính cầm tay (Có giải)",
+                    "point": 6,
+                    "sub_criteria": [
+                        {
+                            "name": "Giải Nhất",
+                            "parentKey": 78,
+                            "key": 82,
+                            "point": 6,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Giải Nhì",
+                            "parentKey": 78,
+                            "key": 83,
+                            "point": 5,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Giải Ba",
+                            "parentKey": 78,
+                            "key": 84,
+                            "point": 4,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 79,
+                    "name": "Giáo viên bồi dưỡng học sinh giỏi Olympic không chuyên TP (lớp 10,11)",
+                    "point": 4,
+                    "sub_criteria": [
+                        {
+                            "name": "Huy chương Vàng",
+                            "parentKey": 79,
+                            "key": 89,
+                            "point": 4,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Huy chương Bạc",
+                            "parentKey": 79,
+                            "key": 90,
+                            "point": 3,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        },
+                        {
+                            "name": "Huy chương Đồng",
+                            "parentKey": 79,
+                            "key": 91,
+                            "point": 2,
+                            "supervisor": "6582b155be8b31b0ca5a87b9"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 80,
+                    "name": "Giáo viên phụ trách câu lạc bộ có giải:",
+                    "point": 2,
+                    "sub_criteria": [
+                        {
+                            "name": "Cấp thành phố",
+                            "parentKey": 80,
+                            "key": 86,
+                            "point": 2,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        },
+                        {
+                            "name": "Cấp cụm",
+                            "parentKey": 80,
+                            "key": 88,
+                            "point": 1,
+                            "supervisor": "6582b155be8b31b0ca5a87cb"
+                        }
+                    ],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 81,
+                    "name": "Giáo viên hướng dẫn học sinh nghiên cứu khoa học có giải cấp TP",
+                    "point": 6,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 92,
+                    "name": "Giáo viên đạt giải \"Giáo viên sáng tạo trên nền tảng CNTT\"",
+                    "point": 6,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 93,
+                    "name": "Giáo viên đạt giải khi tham gia phong trào văn thể mỹ do Công đoàn ngành phát động",
+                    "point": 5,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                },
+                {
+                    "key": 94,
+                    "name": "Giáo viên tham gia dạy BD HSG, NCKHKT, HSG máy tính cầm tay, các cuộc thi liên quan đến chuyển đổi số.",
+                    "point": 2,
+                    "sub_criteria": [],
+                    "supervisor": "6582b155be8b31b0ca5a87cb"
+                }
+            ]
+        }
+    ],
+    "self_expired": "2024-02-05",
+    "supervisor_expired": "2024-02-12",
+    "last_key": 94,
+    "supervisor_list": [
+        "6582b155be8b31b0ca5a87b9",
+        "6582b155be8b31b0ca5a87bd",
+        "6582b155be8b31b0ca5a87cb",
+        "6582b155be8b31b0ca5a87c9",
+        "6582b155be8b31b0ca5a87c1",
+        "6582b155be8b31b0ca5a87bb",
+        "6582b155be8b31b0ca5a87c7",
+        "6582b155be8b31b0ca5a87c3"
+    ]
+}

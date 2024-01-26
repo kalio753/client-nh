@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { Breadcrumb, Button, notification } from "antd"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import myAxios from "../../utils/axios"
 import PopUpModal from "../../component/modals/PopUpModal"
 import intToRoman from "../../utils/intToRoman"
@@ -10,21 +10,18 @@ import { useMyContext } from "../../hooks/myContext"
 export default function GradeGeneralDetail() {
     const { gradeId, userId } = useParams()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const { user_list, user_dict } = useMyContext()
-    // let user_dict = {}
-    // for (const user of user_list) {
-    //     const key = user["_id"]
-    //     user_dict[key] = user.name
-    // }
-    const userName = user_dict[userId]
 
     const [doc, setDocument] = useState()
     console.log("doc ne", doc)
+    const userName = user_dict[doc?.owner]
+    console.log(userName)
 
     useEffect(() => {
         async function fetchData() {
-            const res = await myAxios.get(`/grade/${gradeId}`)
+            const res = await myAxios.get(`/grade/${userId}`)
             const newDoc = res.data.data
             setDocument(newDoc)
         }
@@ -111,6 +108,9 @@ export default function GradeGeneralDetail() {
                                     bordered
                                     setDocument={setDocument}
                                     isEditable={false}
+                                    showSupervisor={
+                                        !location.pathname.includes("grade")
+                                    }
                                 />
                             </div>
                         )

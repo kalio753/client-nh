@@ -2,7 +2,12 @@ import React from "react"
 import { tableComponents } from "./components"
 import { Table } from "antd"
 
-export default function GradeTable({ setDocument, isEditable, ...props }) {
+export default function GradeTable({
+    setDocument,
+    isEditable,
+    showSupervisor,
+    ...props
+}) {
     const defaultColumns = [
         {
             title: "Nội dung",
@@ -18,6 +23,13 @@ export default function GradeTable({ setDocument, isEditable, ...props }) {
             dataIndex: "self_point",
             editable: isEditable,
         },
+        showSupervisor
+            ? {
+                  title: "Điểm tổ CM chấm",
+                  dataIndex: "supervisor_point",
+                  editable: isEditable,
+              }
+            : {},
     ]
 
     const handleSave = (record) => {
@@ -95,6 +107,13 @@ export default function GradeTable({ setDocument, isEditable, ...props }) {
                 dataIndex: "self_point",
                 editable: isEditable,
             },
+            showSupervisor
+                ? {
+                      title: "Điểm tổ CM chấm",
+                      dataIndex: "supervisor_point",
+                      editable: isEditable,
+                  }
+                : {},
         ]
 
         const columns = defaultColumns.map((col) => {

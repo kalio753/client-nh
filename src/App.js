@@ -23,6 +23,7 @@ import UserList from "./Pages/UserList/UserList.js"
 import UserDetail from "./Pages/UserDetail/UserDetail.js"
 import UserCreate from "./Pages/UserCreate/UserCreate.js"
 import ChangePassword from "./Pages/ChangePassword/ChangePassword.js"
+import GeneralUser from "./Pages/GeneralUser/GeneralUser.js"
 
 function App() {
     return (
@@ -30,12 +31,14 @@ function App() {
             <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Sidebar />}>
                     <Route index element={<Home />} />
+                    <Route path="general/:docId" element={<GeneralUser />} />
                     <Route path=":userId" element={<IndexFragment />}>
-                        <Route index element={<GradeGeneralList />} />
+                        <Route index element={<GradeGeneralDetail />} />
+                        {/* <Route index element={<GradeGeneralList />} />
                         <Route
                             path="detail/:gradeId"
                             element={<GradeGeneralDetail />}
-                        />
+                        /> */}
                     </Route>
                     <Route path="docs" element={<IndexFragment />}>
                         <Route index element={<Document />} />
@@ -44,16 +47,10 @@ function App() {
                     </Route>
                     <Route path="grade" element={<IndexFragment />}>
                         <Route index element={<GradeDocList />} />
-                        <Route
-                            path="self/:docId"
-                            element={<GradeSelf isEditable={true} />}
-                        />
+                        <Route path="self/:docId" element={<GradeSelf />} />
                         <Route path="history" element={<IndexFragment />}>
                             <Route index element={<GradeSelfHistory />} />
-                            <Route
-                                path=":docId"
-                                element={<GradeSelf isEditable={false} />}
-                            />
+                            <Route path=":docId" element={<GradeSelf />} />
                         </Route>
                         <Route path="supervisor" element={<IndexFragment />}>
                             <Route index element={<GradeSessionList />} />

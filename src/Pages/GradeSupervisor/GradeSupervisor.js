@@ -9,11 +9,13 @@ import GradeTable from "../../component/gradeTable/GradeTable"
 import decodeJWT from "../../utils/decodeJWTToken"
 import getCookie from "../../utils/getCookie"
 import SupervisorGradeTable from "../../component/supervisorGradeTable/SupervisorGradeTable"
+import { useMyContext } from "../../hooks/myContext"
 
 export default function GradeSupervisor({ isEditable }) {
     const { id } = useParams()
     const navigate = useNavigate()
     const currUser = decodeJWT(getCookie("token")).data
+    const { user_dict } = useMyContext()
 
     // Toast msg
     const [toastApi, contextHolder] = notification.useNotification()
@@ -21,6 +23,7 @@ export default function GradeSupervisor({ isEditable }) {
 
     const [doc, setDocument] = useState()
     console.log("doc ne", doc)
+    const userName = user_dict[doc?.owner]
 
     useEffect(() => {
         async function fetchData() {
@@ -134,9 +137,9 @@ export default function GradeSupervisor({ isEditable }) {
                     margin: "16px 0",
                 }}
             >
-                <Breadcrumb.Item>Điểm của tôi</Breadcrumb.Item>
+                <Breadcrumb.Item>Công việc của tôi</Breadcrumb.Item>
                 <Breadcrumb.Item>Chấm điểm</Breadcrumb.Item>
-                <Breadcrumb.Item>{doc?.name}</Breadcrumb.Item>
+                <Breadcrumb.Item>{userName}</Breadcrumb.Item>
             </Breadcrumb>
             <div
                 className="layout_container grade_self_container"

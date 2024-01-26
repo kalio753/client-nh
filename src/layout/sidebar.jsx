@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
     SearchOutlined,
     AppstoreOutlined,
@@ -7,7 +7,7 @@ import {
     LockOutlined,
 } from "@ant-design/icons"
 import { Layout, Menu, theme } from "antd"
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
 import logoImg from "../images/logo.png"
 import decodeJWT from "../utils/decodeJWTToken"
 import getCookie from "../utils/getCookie"
@@ -26,6 +26,32 @@ function getItem(label, key, icon, children) {
 
 const Sidebar = () => {
     const { role_list } = useMyContext()
+    const location = useLocation()
+    const [current, setCurrent] = useState("4")
+
+    useEffect(() => {
+        const currPathName = location.pathname
+        if (currPathName.includes("/docs")) {
+            setCurrent("1")
+        } else if (currPathName.includes("/user")) {
+            setCurrent("2")
+        } else if (currPathName.includes("/grade")) {
+            if (currPathName.includes("/grade/history")) {
+                setCurrent("6")
+            } else if (currPathName.includes("/grade/supervisor")) {
+                if (currPathName.includes("/grade/supervisor/history")) {
+                    setCurrent("8")
+                } else setCurrent("7")
+            } else {
+                setCurrent("5")
+            }
+        } else if (currPathName.includes("/change_password")) {
+            setCurrent("9")
+        } else {
+            setCurrent("4")
+        }
+    }, [location, current])
+
     let roleIdToRank = {}
     for (const role of role_list) {
         const key = role["_id"]
@@ -129,7 +155,7 @@ const Sidebar = () => {
                 </div>
                 <Menu
                     theme="dark"
-                    defaultSelectedKeys={["4"]}
+                    selectedKeys={[current]}
                     defaultOpenKeys={["sub1", "sub2", "sub3"]}
                     mode="inline"
                     items={items}

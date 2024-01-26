@@ -91,8 +91,9 @@ const EditableCell = ({
                 style={{
                     paddingRight: 24,
                     width: "39%",
+                    height: 32,
                     border: "1px solid red",
-                    borderRadius: 8,
+                    borderRadius: 4,
                 }}
                 onClick={toggleEdit}
             >
@@ -105,9 +106,10 @@ const EditableCell = ({
                 className="editable-cell-value-wrap"
                 style={{
                     paddingRight: 24,
+                    width: "39%",
+                    height: 32,
                     border: "1px solid red",
-                    cursor: "default",
-                    borderRadius: 8,
+                    borderRadius: 4,
                 }}
             >
                 {children}

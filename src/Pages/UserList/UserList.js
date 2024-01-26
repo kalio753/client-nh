@@ -47,7 +47,6 @@ export default function UserList() {
             >
                 <Breadcrumb.Item>Aministrator</Breadcrumb.Item>
                 <Breadcrumb.Item>Quản lý User</Breadcrumb.Item>
-                <Breadcrumb.Item>Cập nhật User</Breadcrumb.Item>
             </Breadcrumb>
             <div
                 className="layout_container user_list_container"

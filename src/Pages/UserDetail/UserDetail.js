@@ -20,6 +20,7 @@ export default function UserDetail() {
     const [isLoading, setIsLoading] = useState(false)
 
     const currUser = user_list.filter((user) => user._id === userId)[0]
+    console.log("ababa", currUser)
 
     if (currUser) {
         currUser.department = currUser.department_id
@@ -54,6 +55,34 @@ export default function UserDetail() {
 
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo)
+    }
+
+    const handleResetPassword = async () => {
+        try {
+            const res = await myAxios.post("/user/resetPassword", {
+                phone: currUser.phone,
+            })
+            if (res.data.status === "success") {
+                toastApi.success({
+                    message: `Cấp lại mật khẩu thành công`,
+                    description: `Người dùng ${currUser.name} đã được cấp lại mật khẩu`,
+                    placement: "top",
+                })
+            } else {
+                toastApi.error({
+                    message: `Cấp mật khẩu thất bại`,
+                    description: "Vui lòng thử lại sau",
+                    placement: "top",
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            toastApi.error({
+                message: `Cấp mật khẩu thất bại`,
+                description: "Vui lòng thử lại sau",
+                placement: "top",
+            })
+        }
     }
 
     return (
@@ -152,11 +181,19 @@ export default function UserDetail() {
                                     Trở lại
                                 </Button>
                                 <Button
+                                    style={{ marginRight: 12 }}
                                     type="primary"
                                     htmlType="submit"
                                     loading={isLoading}
                                 >
                                     Cập nhật
+                                </Button>
+                                <Button
+                                    onClick={handleResetPassword}
+                                    type="primary"
+                                    ghost
+                                >
+                                    Cấp lại mật khẩu
                                 </Button>
                             </Form.Item>
                         </Form>

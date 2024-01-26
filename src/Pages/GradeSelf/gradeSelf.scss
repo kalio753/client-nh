@@ -9,6 +9,20 @@
         margin-bottom: 16px;
     }
 
+    .expired_section {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        justify-content: flex-end;
+        margin-right: 4px;
+        font-size: 15px;
+
+        h3 {
+            text-decoration: underline;
+        }
+    }
+
     .grade_section {
         .content {
             border: 2px dotted #ccc;

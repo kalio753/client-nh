@@ -2,13 +2,23 @@ import React, { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 import "./docDetail.scss"
-import { Breadcrumb, Button, Input, Modal, Table, notification } from "antd"
+import {
+    Breadcrumb,
+    Button,
+    DatePicker,
+    Form,
+    Input,
+    Modal,
+    Table,
+    notification,
+} from "antd"
 import { DeleteFilled, PlusOutlined } from "@ant-design/icons"
 import PlusBox from "../../component/plusBox/PlusBox"
 import DocumentContentTitleAdd from "../../component/modals/DocumentContentTitleAdd"
 import myAxios from "../../utils/axios"
 import PopUpModal from "../../component/modals/PopUpModal"
 import DocumentContentSection from "../../component/contentSection/DocumentContentSection"
+import dayjs from "dayjs"
 const { TextArea } = Input
 
 export default function DocDetail() {
@@ -21,12 +31,17 @@ export default function DocDetail() {
     const [title, setTitle] = useState("")
     const [isLoading, setisLoading] = useState(false)
     const [doc, setDocument] = useState()
+    const [selfExpired, setSelfExpired] = useState("")
+    const [supervisorExpired, setSupervisorExpired] = useState("")
+
     useEffect(() => {
         async function fetchData() {
             const res = await myAxios.get(`/docs/${docId}`)
             setDocument(res.data.data)
             setTitle(res.data.data.name)
             setCount(res.data.data.last_key)
+            setSelfExpired(dayjs(res.data.data.self_expired))
+            setSupervisorExpired(dayjs(res.data.data.supervisor_expired))
         }
         fetchData()
     }, [])
@@ -95,6 +110,8 @@ export default function DocDetail() {
                 ...doc,
                 last_key: count,
                 supervisor_list: supervisor_list,
+                self_expired: selfExpired,
+                supervisor_expired: supervisorExpired,
             })
             if (response.data.status === "success") {
                 setisLoading(false)
@@ -104,14 +121,16 @@ export default function DocDetail() {
                         "Cập nhật tài liệu thành công, đang chuyển về trang trước",
                     placement: "top",
                 })
-                navigate("/docs")
+                setTimeout(() => {
+                    navigate("/docs")
+                }, 2000)
             }
         } catch (error) {
             console.error(error)
             setisLoading(false)
             toastApi.error({
                 message: `Cập nhật tài liệu thất bại`,
-                description: error,
+                description: error.response.data.msg,
                 placement: "top",
             })
         }
@@ -181,18 +200,43 @@ export default function DocDetail() {
                 <div className="divider"></div>
 
                 <div className="update_section">
-                    <div className="doc_title_input">
-                        <h2>Tên tài liệu:</h2>
-                        <TextArea
-                            autoSize
-                            value={doc?.name}
-                            onChange={(e) => {
-                                setTitle(e.target.value)
-                                setDocument((prev) => {
-                                    return { ...prev, name: e.target.value }
-                                })
-                            }}
-                        />
+                    <div className="doc_title">
+                        <div className="doc_title_input">
+                            <h2>Tên tài liệu:</h2>
+                            <TextArea
+                                autoSize
+                                value={doc?.name}
+                                onChange={(e) => {
+                                    setTitle(e.target.value)
+                                    setDocument((prev) => {
+                                        return { ...prev, name: e.target.value }
+                                    })
+                                }}
+                            />
+                        </div>
+                        <div className="expired_section">
+                            <div style={{ marginBottom: 8 }}>
+                                Hạn chót cho giáo viên:
+                                <DatePicker
+                                    onChange={(date, dateString) =>
+                                        setSelfExpired(dayjs(dateString))
+                                    }
+                                    style={{ marginLeft: 8 }}
+                                    value={dayjs(selfExpired)}
+                                />
+                            </div>
+
+                            <div>
+                                Hạn chót cho người phụ trách:
+                                <DatePicker
+                                    onChange={(date, dateString) =>
+                                        setSupervisorExpired(dayjs(dateString))
+                                    }
+                                    style={{ marginLeft: 8 }}
+                                    value={dayjs(supervisorExpired)}
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     <DocumentContentSection

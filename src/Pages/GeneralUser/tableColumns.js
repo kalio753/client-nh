@@ -3,16 +3,20 @@ import { ArrowRightOutlined } from "@ant-design/icons"
 
 const columns = [
     {
-        title: "Tên phiếu đánh giá",
-        dataIndex: "name",
-        key: "name",
-        width: "50%",
+        title: "Tên giáo viên",
+        dataIndex: "user_name",
+        key: "user_name",
+        width: "30%",
     },
     {
-        title: "Năm",
-        dataIndex: "year",
-        key: "year",
-        align: "center",
+        title: "Phòng ban",
+        dataIndex: "dept_name",
+        key: "dept_name",
+    },
+    {
+        title: "Điểm tự chấm",
+        dataIndex: "total_self_point",
+        key: "self_point",
     },
     {
         title: "Hành động",
@@ -21,7 +25,7 @@ const columns = [
         align: "center",
         render: (_, record) => {
             return (
-                <Link to={`/general/${record.key}`} className="action_link">
+                <Link to={`/${record._id}`} className="action_link">
                     Xem chi tiết <ArrowRightOutlined />
                 </Link>
             )

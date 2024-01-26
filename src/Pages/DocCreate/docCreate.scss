@@ -9,19 +9,31 @@
     }
 
     .create_section {
-        .doc_title_input {
+        .doc_title {
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 12px;
+            justify-content: space-between;
             margin-bottom: 16px;
 
-            textarea {
-                font-weight: bold;
-                min-height: 48px !important;
-                line-height: 36px;
-                font-size: 18px;
-                width: 50%;
+            .doc_title_input {
+                flex: 1;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 12px;
+
+                textarea {
+                    font-weight: bold;
+                    min-height: 48px !important;
+                    line-height: 36px;
+                    font-size: 18px;
+                    width: 50%;
+                }
+            }
+
+            .expired_section {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
             }
         }
     }

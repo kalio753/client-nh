@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import "./docCreate.scss"
-import { Breadcrumb, Button, Input, notification } from "antd"
+import { Breadcrumb, Button, DatePicker, Input, notification } from "antd"
 import { useNavigate } from "react-router-dom"
 import PlusBox from "../../component/plusBox/PlusBox"
 import DocumentContentTitleAdd from "../../component/modals/DocumentContentTitleAdd"
@@ -17,6 +17,8 @@ export default function DocCreate() {
     const [count, setCount] = useState(0)
     const [title, setTitle] = useState("")
     const [isLoading, setisLoading] = useState(false)
+    const [selfExpired, setSelfExpired] = useState("")
+    const [supervisorExpired, setSupervisorExpired] = useState("")
 
     const [doc, setDocument] = useState({
         name: "",
@@ -79,6 +81,12 @@ export default function DocCreate() {
                     "Chưa chọn người phụ trách cho một hoặc một số nội dung",
                 placement: "top",
             })
+        } else if (!selfExpired || !supervisorExpired) {
+            toastApi.error({
+                message: `Vui lòng chọn ngày hết hạn`,
+                description: "Chưa chọn ngày hết hạn cho tài liệu",
+                placement: "top",
+            })
         } else {
             setIsCreateModalOpen(true)
         }
@@ -99,6 +107,8 @@ export default function DocCreate() {
                 ...doc,
                 last_key: count,
                 supervisor_list: supervisor_list[0],
+                self_expired: selfExpired,
+                supervisor_expired: supervisorExpired,
             })
             if (response.data.status === "success") {
                 toastApi.success({
@@ -149,18 +159,41 @@ export default function DocCreate() {
                 <div className="divider"></div>
 
                 <div className="create_section">
-                    <div className="doc_title_input">
-                        <h2>Tên tài liệu:</h2>
-                        <TextArea
-                            autoSize
-                            value={doc?.name}
-                            onChange={(e) => {
-                                setTitle(e.target.value)
-                                setDocument((prev) => {
-                                    return { ...prev, name: e.target.value }
-                                })
-                            }}
-                        />
+                    <div className="doc_title">
+                        <div className="doc_title_input">
+                            <h2>Tên tài liệu:</h2>
+                            <TextArea
+                                autoSize
+                                value={doc?.name}
+                                onChange={(e) => {
+                                    setTitle(e.target.value)
+                                    setDocument((prev) => {
+                                        return { ...prev, name: e.target.value }
+                                    })
+                                }}
+                            />
+                        </div>
+                        <div className="expired_section">
+                            <div style={{ marginBottom: 8 }}>
+                                Hạn chót cho giáo viên:
+                                <DatePicker
+                                    onChange={(date, dateString) =>
+                                        setSelfExpired(dateString)
+                                    }
+                                    style={{ marginLeft: 8 }}
+                                />
+                            </div>
+
+                            <div>
+                                Hạn chót cho người phụ trách:
+                                <DatePicker
+                                    onChange={(date, dateString) =>
+                                        setSupervisorExpired(dateString)
+                                    }
+                                    style={{ marginLeft: 8 }}
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     <DocumentContentSection

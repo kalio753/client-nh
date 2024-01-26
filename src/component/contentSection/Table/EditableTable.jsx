@@ -15,10 +15,18 @@ export default function EditableTable({
     const handleSave = (record) => {
         setDocument((prev) => {
             const section = prev.section.map((item) => {
-                const newContent = item.content.map((item) =>
-                    item.key === record.key ? record : item,
+                const newContent = item.content.map((ele) =>
+                    ele.key === record.key ? record : ele,
                 )
-                return { ...item, content: newContent }
+                const sectionTotalPoint = item.content.reduce(
+                    (acc, ele) => acc + ele.point,
+                    0,
+                )
+                return {
+                    ...item,
+                    content: newContent,
+                    total_point: sectionTotalPoint,
+                }
             })
 
             return { ...prev, section }

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { Breadcrumb, Button, notification } from "antd"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import myAxios from "../../utils/axios"
 import PopUpModal from "../../component/modals/PopUpModal"
 import "./gradeSelf.scss"
@@ -8,22 +8,30 @@ import intToRoman from "../../utils/intToRoman"
 import GradeTable from "../../component/gradeTable/GradeTable"
 import decodeJWT from "../../utils/decodeJWTToken"
 import getCookie from "../../utils/getCookie"
+import { formatedDate, isDateExpired } from "../../utils/dateFormat"
 
-export default function GradeSelf({ isEditable }) {
+export default function GradeSelf() {
     const { docId } = useParams()
     const navigate = useNavigate()
+    const location = useLocation()
 
     // Toast msg
     const [toastApi, contextHolder] = notification.useNotification()
     const [isLoading, setisLoading] = useState(false)
+    const currUser = decodeJWT(getCookie("token")).data
 
     const [doc, setDocument] = useState()
     console.log("doc ne", doc)
+    const isEditable = !isDateExpired(doc?.self_expired)
 
     useEffect(() => {
         async function fetchData() {
             const res = await myAxios.get(
-                `${isEditable ? `/docs/${docId}` : `/grade/${docId}`}`,
+                `${
+                    !location.pathname.includes("history")
+                        ? `/docs/${docId}`
+                        : `/grade/${docId}`
+                }`,
             )
             const newDoc = res.data.data
             setDocument(newDoc)
@@ -36,7 +44,7 @@ export default function GradeSelf({ isEditable }) {
         setIsCancelModalOpen(true)
     }
     const handleCancelModal = () => {
-        navigate("/grade")
+        navigate(-1)
     }
 
     const calculateSectionTotalPoints = (index) => {
@@ -49,11 +57,12 @@ export default function GradeSelf({ isEditable }) {
     }
     const calculateSectionSelfPoints = (index) => {
         const total_point = doc?.section[index]?.content.reduce(
-            (acc, content, index) => acc + content.self_point,
+            (acc, content) =>
+                content.self_point ? acc + content.self_point : acc,
             0,
         )
 
-        return total_point ? total_point : 0
+        return total_point && total_point > 0 ? total_point : 0
     }
 
     const handleOnSubmit = async () => {
@@ -62,63 +71,66 @@ export default function GradeSelf({ isEditable }) {
                 section.content.map((item) => item.self_point),
             ),
         )
-        const isNullSelfPoint = doc.section
-            .map((section) => section.content.map((item) => item.self_point))
-            .some((value) => {
-                return value.includes(undefined, null)
-            })
-        console.log(isNullSelfPoint)
+        // const isNullSelfPoint = doc.section
+        //     .map((section) => section.content.map((item) => item.self_point))
+        //     .some((value) => {
+        //         return value.includes(undefined, null)
+        //     })
+        // console.log(isNullSelfPoint)
 
-        if (isNullSelfPoint) {
-            toastApi.error({
-                message: `Vui lòng nhập tại các nội dung lớn`,
-                description: "Chưa chấm điểm cho một hoặc một số nội dung",
-                placement: "top",
-            })
-        } else {
-            try {
-                setisLoading(true)
-                const total_self_point = doc?.section?.reduce(
-                    (acc, docItem, index) => {
-                        return calculateSectionSelfPoints(index) + acc
-                    },
-                    0,
-                )
+        // if (isNullSelfPoint) {
+        //     toastApi.error({
+        //         message: `Vui lòng nhập tại các nội dung lớn`,
+        //         description: "Chưa chấm điểm cho một hoặc một số nội dung",
+        //         placement: "top",
+        //     })
+        // } else {
+        try {
+            setisLoading(true)
+            const total_self_point = doc?.section?.reduce(
+                (acc, docItem, index) => {
+                    return calculateSectionSelfPoints(index) + acc
+                },
+                0,
+            )
+
+            let response
+            if (!location.pathname.includes("history")) {
                 const { _id, created_at, ...request_obj } = doc
-                const user_id = decodeJWT(getCookie("token")).data._id
-
                 const gradeSessionObj = {
                     ...request_obj,
                     doc_id: _id,
                     total_self_point,
-                    owner: user_id,
+                    owner: currUser._id,
+                    dept_id: currUser.department_id,
+                    created_at: new Date(),
                 }
 
-                const response = await myAxios.post(
-                    "/grade/add",
-                    gradeSessionObj,
-                )
-                if (response.data.status === "success") {
-                    toastApi.success({
-                        message: `Chấm điểm thành công`,
-                        description:
-                            "Chấm điểm thành công, đang chuyển về trang trước",
-                        placement: "top",
-                    })
-                    setTimeout(() => {
-                        navigate("/grade/history")
-                    }, 2300)
-                }
-            } catch (error) {
-                console.error(error)
-                setisLoading(false)
-                toastApi.error({
-                    message: `Chấm điểm thất bại`,
-                    description: error,
+                response = await myAxios.post("/grade/add", gradeSessionObj)
+            } else {
+                response = await myAxios.post(`/grade/update/${doc?._id}`, doc)
+            }
+            if (response.data.status === "success") {
+                toastApi.success({
+                    message: `Chấm điểm thành công`,
+                    description:
+                        "Chấm điểm thành công, đang chuyển về trang trước",
                     placement: "top",
                 })
+                setTimeout(() => {
+                    navigate("/grade/history")
+                }, 2300)
             }
+        } catch (error) {
+            console.error(error)
+            setisLoading(false)
+            toastApi.error({
+                message: `Chấm điểm thất bại`,
+                description: error,
+                placement: "top",
+            })
         }
+        // }
     }
 
     return (
@@ -148,6 +160,11 @@ export default function GradeSelf({ isEditable }) {
                 </div>
 
                 <div className="divider"></div>
+
+                <div className="expired_section">
+                    <span>Hạn chót đánh giá: </span>
+                    <h3>{formatedDate(doc?.self_expired)}</h3>
+                </div>
 
                 <div className="grade_section">
                     {doc?.section?.map((docItem, index) => {
@@ -180,6 +197,9 @@ export default function GradeSelf({ isEditable }) {
                                     bordered
                                     setDocument={setDocument}
                                     isEditable={isEditable}
+                                    showSupervisor={
+                                        !location.pathname.includes("grade")
+                                    }
                                 />
                             </div>
                         )
@@ -202,11 +222,7 @@ export default function GradeSelf({ isEditable }) {
                             </Button>
                         </>
                     ) : (
-                        <Button
-                            block
-                            danger
-                            onClick={() => navigate("/grade/history")}
-                        >
+                        <Button block danger onClick={() => navigate(-1)}>
                             Quay lại
                         </Button>
                     )}

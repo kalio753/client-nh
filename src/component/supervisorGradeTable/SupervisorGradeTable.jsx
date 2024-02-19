@@ -165,6 +165,7 @@ export default function SupervisorGradeTable({
                 expandedRowRender,
                 defaultExpandAllRows: true,
             }}
+            className="main-table"
         />
     )
 }

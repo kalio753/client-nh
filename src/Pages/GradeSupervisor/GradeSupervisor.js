@@ -50,85 +50,85 @@ export default function GradeSupervisor() {
             0,
         )
 
-        return total_point
+        return total_point && total_point > 0 ? total_point : 0
     }
 
     const handleOnSubmit = async () => {
-        const isNullSelfPoint = doc.section
-            .map((section) =>
-                section.content.some(
-                    (item) =>
-                        (item.supervisor_point === null ||
-                            item.supervisor_point === null) &&
-                        currUser.role_id.includes(item.supervisor),
-                ),
+        // const isNullSelfPoint = doc.section
+        //     .map((section) =>
+        //         section.content.some(
+        //             (item) =>
+        //                 (item.supervisor_point === null ||
+        //                     item.supervisor_point === null) &&
+        //                 currUser.role_id.includes(item.supervisor),
+        //         ),
+        //     )
+        //     .some((item) => item)
+        // if (isNullSelfPoint) {
+        //     toastApi.error({
+        //         message: `Vui lòng nhập điểm tại các nội dung lớn`,
+        //         description:
+        //             "Một hoặc một số nội dung điểm lớn đang bị để trống",
+        //         placement: "top",
+        //     })
+        // } else {
+        try {
+            setisLoading(true)
+            const total_supervisor_point = doc?.section?.reduce(
+                (acc, docItem, index) => {
+                    return calculateSectionSupervisorPoints(index) + acc
+                },
+                0,
             )
-            .some((item) => item)
-        if (isNullSelfPoint) {
-            toastApi.error({
-                message: `Vui lòng nhập điểm tại các nội dung lớn`,
-                description:
-                    "Một hoặc một số nội dung điểm lớn đang bị để trống",
-                placement: "top",
-            })
-        } else {
-            try {
-                setisLoading(true)
-                const total_supervisor_point = doc?.section?.reduce(
-                    (acc, docItem, index) => {
-                        return calculateSectionSupervisorPoints(index) + acc
+            const { section, process } = doc
+
+            const userRoles = [...currUser.role_id]
+            const docRoles = [...doc.supervisor_list]
+            // check same element from role_list
+            for (let i = 0; i < userRoles.length; i++) {
+                const currentElement = userRoles[i]
+
+                const indexInArray2 = docRoles.indexOf(currentElement)
+
+                if (indexInArray2 !== -1) {
+                    docRoles.splice(indexInArray2, 1)
+                    i--
+                }
+            }
+            const res = await myAxios.post(`grade/update/${doc._id}`, {
+                section: [...section],
+                process: [
+                    ...process,
+                    {
+                        person: currUser._id,
+                        graded_at: new Date(),
                     },
-                    0,
-                )
-                const { section, process } = doc
+                ],
+                supervisor_list: docRoles,
+                total_supervisor_point,
+            })
 
-                const userRoles = [...currUser.role_id]
-                const docRoles = [...doc.supervisor_list]
-                // check same element from role_list
-                for (let i = 0; i < userRoles.length; i++) {
-                    const currentElement = userRoles[i]
-
-                    const indexInArray2 = docRoles.indexOf(currentElement)
-
-                    if (indexInArray2 !== -1) {
-                        docRoles.splice(indexInArray2, 1)
-                        i--
-                    }
-                }
-                const res = await myAxios.post(`grade/update/${doc._id}`, {
-                    section: [...section],
-                    process: [
-                        ...process,
-                        {
-                            person: currUser._id,
-                            graded_at: new Date(),
-                        },
-                    ],
-                    supervisor_list: docRoles,
-                    total_supervisor_point,
-                })
-
-                if (res.data.status === "success") {
-                    toastApi.success({
-                        message: `Chấm điểm thành công`,
-                        description:
-                            "Chấm điểm thành công, đang chuyển về trang trước",
-                        placement: "top",
-                    })
-                    setTimeout(() => {
-                        navigate("/grade/supervisor/history")
-                    }, 2300)
-                }
-            } catch (error) {
-                setisLoading(false)
-                console.error(error)
-                toastApi.error({
-                    message: `Chấm điểm thất bại, vui lòng thử lại sau`,
-                    description: error.response.data.msg,
+            if (res.data.status === "success") {
+                toastApi.success({
+                    message: `Chấm điểm thành công`,
+                    description:
+                        "Chấm điểm thành công, đang chuyển về trang trước",
                     placement: "top",
                 })
+                setTimeout(() => {
+                    navigate("/grade/supervisor/history")
+                }, 2300)
             }
+        } catch (error) {
+            setisLoading(false)
+            console.error(error)
+            toastApi.error({
+                message: `Chấm điểm thất bại, vui lòng thử lại sau`,
+                description: error.response.data.msg,
+                placement: "top",
+            })
         }
+        // }
     }
 
     return (

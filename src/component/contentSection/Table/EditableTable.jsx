@@ -281,7 +281,7 @@ export default function EditableTable({
                 defaultExpandAllRows: true,
                 showExpandColumn: true,
             }}
-            className="editable-table"
+            className="editable-table main-table"
         />
     )
 }

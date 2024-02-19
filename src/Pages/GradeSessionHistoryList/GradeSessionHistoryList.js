@@ -6,12 +6,16 @@ import myAxios from "../../utils/axios"
 import decodeJWT from "../../utils/decodeJWTToken"
 import getCookie from "../../utils/getCookie"
 import timeSince from "../../utils/timeSince"
+import { useMyContext } from "../../hooks/myContext"
 
 export default function GradeSessionHistoryList() {
+    const { user_dict } = useMyContext()
+
     const [doc, setDoc] = useState()
     const tableData = doc?.map((item) => {
         return {
-            name: item.name,
+            name: user_dict[item.owner],
+            doc: item.name,
             key: item._id,
             year: timeSince(new Date(item.created_at)),
         }
@@ -26,7 +30,7 @@ export default function GradeSessionHistoryList() {
                     user_id,
                     is_history: true,
                 })
-                console.log(res)
+                console.log(res.data.data)
                 res.status === 200 ? setDoc(res.data.data) : null
             } catch (error) {
                 console.log(error)

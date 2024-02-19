@@ -80,8 +80,8 @@ export default function ChangePassword() {
                     margin: "16px 0",
                 }}
             >
-                <Breadcrumb.Item>Administrator</Breadcrumb.Item>
-                <Breadcrumb.Item>Cập nhật tài liệu</Breadcrumb.Item>
+                <Breadcrumb.Item>Cá nhân</Breadcrumb.Item>
+                <Breadcrumb.Item>Đổi mật khẩu</Breadcrumb.Item>
             </Breadcrumb>
             <div
                 className="layout_container change_password_container"

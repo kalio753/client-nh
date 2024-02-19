@@ -158,6 +158,7 @@ export default function GradeTable({
                 expandedRowRender,
                 defaultExpandAllRows: true,
             }}
+            className="main-table"
         />
     )
 }

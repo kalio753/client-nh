@@ -82,3 +82,33 @@ h6 {
 .ant-breadcrumb-link {
     cursor: pointer;
 }
+
+.expanded-table {
+    .ant-table-row {
+        background-color: #fafafa;
+    }
+    .ant-table-thead {
+        .ant-table-cell {
+            background-color: #fafafa !important;
+        }
+    }
+    // .ant-table-tbody {
+    //     .ant-table-cell-row-hover {
+    //         background-color: #fafafa !important;
+    //     }
+    // }
+}
+
+.main-table {
+    .ant-table-thead {
+        .ant-table-cell {
+            background-color: #ededed;
+        }
+    }
+
+    .ant-table-tbody {
+        .ant-table-cell-row-hover {
+            background-color: #fafafa !important;
+        }
+    }
+}

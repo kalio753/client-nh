@@ -73,7 +73,7 @@ const EditableCell = ({
                 <InputNumber
                     // min={maxOrMinPoint > 0 ? 0 : maxOrMinPoint}
                     min={
-                        maxOrMinPoint === 0
+                        maxOrMinPoint <= 0
                             ? -999
                             : maxOrMinPoint > 0
                             ? 0

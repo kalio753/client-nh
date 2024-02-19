@@ -86,13 +86,14 @@ export default function GradeSelf() {
         //     })
         // } else {
         try {
-            setisLoading(true)
+            // setisLoading(true)
             const total_self_point = doc?.section?.reduce(
                 (acc, docItem, index) => {
                     return calculateSectionSelfPoints(index) + acc
                 },
                 0,
             )
+            console.log("total_self_point", total_self_point)
 
             let response
             if (!location.pathname.includes("history")) {
@@ -108,7 +109,10 @@ export default function GradeSelf() {
 
                 response = await myAxios.post("/grade/add", gradeSessionObj)
             } else {
-                response = await myAxios.post(`/grade/update/${doc?._id}`, doc)
+                response = await myAxios.post(`/grade/update/${doc?._id}`, {
+                    ...doc,
+                    total_self_point,
+                })
             }
             if (response.data.status === "success") {
                 toastApi.success({

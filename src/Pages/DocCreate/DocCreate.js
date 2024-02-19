@@ -7,6 +7,7 @@ import DocumentContentTitleAdd from "../../component/modals/DocumentContentTitle
 import myAxios from "../../utils/axios"
 import PopUpModal from "../../component/modals/PopUpModal"
 import DocumentContentSection from "../../component/contentSection/DocumentContentSection"
+import defaultDoc from "./defaultDoc"
 const { TextArea } = Input
 
 export default function DocCreate() {
@@ -15,29 +16,12 @@ export default function DocCreate() {
     // Toast msg
     const [toastApi, contextHolder] = notification.useNotification()
     const [count, setCount] = useState(0)
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState(defaultDoc.name)
     const [isLoading, setisLoading] = useState(false)
     const [selfExpired, setSelfExpired] = useState("")
     const [supervisorExpired, setSupervisorExpired] = useState("")
 
-    const [doc, setDocument] = useState({
-        name: "",
-        section: [
-            {
-                title: "Tư tưởng chính trị",
-                total_point: 0,
-                content: [
-                    {
-                        key: count,
-                        supervisor: "",
-                        name: "Chấp hành tốt chủ trương chính sách của Đảng, pháp luật nhà nước",
-                        point: 0,
-                        sub_criteria: [],
-                    },
-                ],
-            },
-        ],
-    })
+    const [doc, setDocument] = useState(defaultDoc)
     console.log("doc ne", doc)
 
     const [isContentTitleModalOpen, setIsContentTitleModalOpen] =

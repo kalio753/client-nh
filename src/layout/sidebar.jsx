@@ -60,14 +60,14 @@ const Sidebar = () => {
 
     const currUser = decodeJWT(getCookie("token")).data
     const roleRankList = [currUser.role_id.map((item) => roleIdToRank[item])]
-    console.log("Sidebar log", currUser)
-    console.log("Sidebar log", roleRankList)
+    // console.log("Sidebar: currUser", currUser)
+    // console.log("Sidebar: rank list", roleRankList)
     const items = [
         roleRankList[0].includes(0) &&
             getItem("Administrator", "sub1", <StarOutlined />, [
                 getItem("Cập nhật tài liệu", "1"),
                 getItem("Quản lý User", "2"),
-                getItem("Điểm HĐTĐ", "3"),
+                // getItem("Điểm HĐTĐ", "3"),
             ]),
         getItem("Mọi người", "4", <SearchOutlined />),
         getItem("Điểm của tôi", "sub2", <AppstoreOutlined />, [

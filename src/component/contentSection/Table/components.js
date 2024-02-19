@@ -59,6 +59,9 @@ const EditableCell = ({
     }
     const handleChange = async (value) => {
         console.log(`selected ${value}`)
+        record.sub_criteria.forEach((item) => {
+            item.supervisor = value
+        })
         record.supervisor = value
         const values = await form.validateFields()
         handleSave({

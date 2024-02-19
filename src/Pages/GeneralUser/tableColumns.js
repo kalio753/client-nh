@@ -6,7 +6,6 @@ const columns = [
         title: "Tên giáo viên",
         dataIndex: "user_name",
         key: "user_name",
-        width: "30%",
     },
     {
         title: "Phòng ban",
@@ -17,6 +16,13 @@ const columns = [
         title: "Điểm tự chấm",
         dataIndex: "total_self_point",
         key: "self_point",
+        width: "15%",
+    },
+    {
+        title: "Điểm tổ chuyên môn",
+        dataIndex: "total_supervisor_point",
+        key: "supervisor_point",
+        width: "15%",
     },
     {
         title: "Hành động",

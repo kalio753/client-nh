@@ -74,8 +74,14 @@ const EditableCell = ({
                 ]}
             >
                 <InputNumber
-                    min={maxOrMinPoint > 0 ? 0 : maxOrMinPoint}
-                    max={maxOrMinPoint > 0 ? maxOrMinPoint : 0}
+                    min={
+                        maxOrMinPoint <= 0
+                            ? -999
+                            : maxOrMinPoint > 0
+                            ? 0
+                            : maxOrMinPoint
+                    }
+                    max={maxOrMinPoint >= 0 ? maxOrMinPoint : 0}
                     ref={inputRef}
                     onPressEnter={save}
                     onBlur={save}

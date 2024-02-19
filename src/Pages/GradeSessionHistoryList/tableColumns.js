@@ -4,11 +4,18 @@ import { ArrowRightOutlined } from "@ant-design/icons"
 
 const columns = [
     {
-        title: "Tên tài liệu",
+        title: "Tên giáo viên",
         dataIndex: "name",
         key: "name",
-        width: "70%",
-        render: (text) => <Link to={"/"}>{text}</Link>,
+        width: "20%",
+        // render: (text) => <Link to={"/"}>{text}</Link>,
+    },
+    {
+        title: "Tên tài liệu",
+        dataIndex: "doc",
+        key: "doc",
+        width: "50%",
+        // render: (text) => <Link to={"/"}>{text}</Link>,
     },
     {
         title: "Thời gian",

@@ -6,6 +6,10 @@ import PopUpModal from "../../component/modals/PopUpModal"
 import intToRoman from "../../utils/intToRoman"
 import GradeTable from "../../component/gradeTable/GradeTable"
 import { useMyContext } from "../../hooks/myContext"
+import {
+    calculateSectionSelfPoints,
+    calculateSectionTotalPoints,
+} from "../../utils/calculatePoint"
 
 export default function GradeGeneralDetail() {
     const { gradeId, userId } = useParams()
@@ -32,23 +36,6 @@ export default function GradeGeneralDetail() {
 
     const handleCancelModal = () => {
         navigate("/grade")
-    }
-
-    const calculateSectionTotalPoints = (index) => {
-        const total_point = doc?.section[index]?.content.reduce(
-            (acc, content, index) => acc + content.point,
-            0,
-        )
-
-        return total_point
-    }
-    const calculateSectionSelfPoints = (index) => {
-        const total_point = doc?.section[index]?.content.reduce(
-            (acc, content, index) => acc + content.self_point,
-            0,
-        )
-
-        return total_point
     }
 
     return (
@@ -89,10 +76,15 @@ export default function GradeGeneralDetail() {
                                             {docItem.title}
                                         </h2>{" "}
                                         <span>
-                                            ({calculateSectionSelfPoints(index)}
+                                            (
+                                            {calculateSectionSelfPoints(
+                                                doc,
+                                                index,
+                                            )}
                                             /
                                             <b>
                                                 {calculateSectionTotalPoints(
+                                                    doc,
                                                     index,
                                                 )}
                                             </b>{" "}

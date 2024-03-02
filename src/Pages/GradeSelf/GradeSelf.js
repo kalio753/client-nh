@@ -9,6 +9,11 @@ import GradeTable from "../../component/gradeTable/GradeTable"
 import decodeJWT from "../../utils/decodeJWTToken"
 import getCookie from "../../utils/getCookie"
 import { formatedDate, isDateExpired } from "../../utils/dateFormat"
+import {
+    calculateSectionSelfPoints,
+    calculateSectionTotalPoints,
+    calculateTotalPoint,
+} from "../../utils/calculatePoint"
 
 export default function GradeSelf() {
     const { docId } = useParams()
@@ -47,24 +52,6 @@ export default function GradeSelf() {
         navigate(-1)
     }
 
-    const calculateSectionTotalPoints = (index) => {
-        const total_point = doc?.section[index]?.content.reduce(
-            (acc, content, index) => acc + content.point,
-            0,
-        )
-
-        return total_point ? total_point : 0
-    }
-    const calculateSectionSelfPoints = (index) => {
-        const total_point = doc?.section[index]?.content.reduce(
-            (acc, content) =>
-                content.self_point ? acc + content.self_point : acc,
-            0,
-        )
-
-        return total_point && total_point > 0 ? total_point : 0
-    }
-
     const handleOnSubmit = async () => {
         console.log(
             doc.section.map((section) =>
@@ -86,10 +73,9 @@ export default function GradeSelf() {
         //     })
         // } else {
         try {
-            // setisLoading(true)
             const total_self_point = doc?.section?.reduce(
                 (acc, docItem, index) => {
-                    return calculateSectionSelfPoints(index) + acc
+                    return calculateSectionSelfPoints(doc, index) + acc
                 },
                 0,
             )
@@ -182,10 +168,15 @@ export default function GradeSelf() {
                                             {docItem.title}
                                         </h2>{" "}
                                         <span>
-                                            ({calculateSectionSelfPoints(index)}
+                                            (
+                                            {calculateSectionSelfPoints(
+                                                doc,
+                                                index,
+                                            )}
                                             /
                                             <b>
                                                 {calculateSectionTotalPoints(
+                                                    doc,
                                                     index,
                                                 )}
                                             </b>{" "}
@@ -201,14 +192,17 @@ export default function GradeSelf() {
                                     bordered
                                     setDocument={setDocument}
                                     isEditable={isEditable}
-                                    showSupervisor={
-                                        !location.pathname.includes("grade")
-                                    }
+                                    isSupervisor={false}
+                                    showSupervisor={doc.total_supervisor_point}
                                 />
                             </div>
                         )
                     })}
                 </div>
+
+                <h2 className="total_point">
+                    Tổng điểm: {calculateTotalPoint(doc, "SELF")}{" "}
+                </h2>
 
                 <div className="action_section">
                     {isEditable ? (

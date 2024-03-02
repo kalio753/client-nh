@@ -11,6 +11,11 @@ import getCookie from "../../utils/getCookie"
 import SupervisorGradeTable from "../../component/supervisorGradeTable/SupervisorGradeTable"
 import { useMyContext } from "../../hooks/myContext"
 import { formatedDate, isDateExpired } from "../../utils/dateFormat"
+import {
+    calculateSectionSelfPoints,
+    calculateSectionSupervisorPoints,
+    calculateTotalPoint,
+} from "../../utils/calculatePoint"
 
 export default function GradeSupervisor() {
     const { id } = useParams()
@@ -44,15 +49,6 @@ export default function GradeSupervisor() {
         navigate("/grade")
     }
 
-    const calculateSectionSupervisorPoints = (index) => {
-        const total_point = doc?.section[index]?.content.reduce(
-            (acc, content, index) => acc + content.supervisor_point,
-            0,
-        )
-
-        return total_point && total_point > 0 ? total_point : 0
-    }
-
     const handleOnSubmit = async () => {
         // const isNullSelfPoint = doc.section
         //     .map((section) =>
@@ -76,7 +72,7 @@ export default function GradeSupervisor() {
             setisLoading(true)
             const total_supervisor_point = doc?.section?.reduce(
                 (acc, docItem, index) => {
-                    return calculateSectionSupervisorPoints(index) + acc
+                    return calculateSectionSupervisorPoints(doc, index) + acc
                 },
                 0,
             )
@@ -194,6 +190,10 @@ export default function GradeSupervisor() {
                         )
                     })}
                 </div>
+
+                <h2 className="total_point">
+                    Tổng điểm: {calculateTotalPoint(doc, "SUPERVISOR")}{" "}
+                </h2>
 
                 <div className="action_section">
                     {isEditable ? (

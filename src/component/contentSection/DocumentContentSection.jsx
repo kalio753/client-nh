@@ -6,6 +6,7 @@ import intToRoman from "../../utils/intToRoman"
 import "./contentSection.scss"
 import myAxios from "../../utils/axios"
 import { useMyContext } from "../../hooks/myContext"
+import { calculateSectionTotalPoints } from "../../utils/calculatePoint"
 
 export default function DocumentContentSection({
     doc,
@@ -51,15 +52,6 @@ export default function DocumentContentSection({
         })
     }
 
-    const calculateSectionTotalPoints = (index) => {
-        const total_point = doc?.section[index]?.content.reduce(
-            (acc, content, index) => acc + content.point,
-            0,
-        )
-
-        return total_point
-    }
-
     return (
         <>
             <div className="content_list">
@@ -80,6 +72,7 @@ export default function DocumentContentSection({
                                                 (
                                                 <b>
                                                     {calculateSectionTotalPoints(
+                                                        doc,
                                                         index,
                                                     )}
                                                 </b>{" "}

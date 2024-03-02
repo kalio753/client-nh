@@ -46,6 +46,11 @@
         }
     }
 
+    .total_point {
+        display: flex;
+        justify-content: end;
+    }
+
     .action_section {
         margin-top: 32px;
         margin-bottom: 16px;

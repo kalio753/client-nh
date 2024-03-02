@@ -6,6 +6,7 @@ export default function GradeTable({
     setDocument,
     isEditable,
     showSupervisor,
+    isSupervisor,
     ...props
 }) {
     const defaultColumns = [
@@ -27,7 +28,7 @@ export default function GradeTable({
             ? {
                   title: "Điểm tổ CM chấm",
                   dataIndex: "supervisor_point",
-                  editable: isEditable,
+                  editable: isEditable && isSupervisor,
               }
             : {},
     ]
@@ -111,7 +112,7 @@ export default function GradeTable({
                 ? {
                       title: "Điểm tổ CM chấm",
                       dataIndex: "supervisor_point",
-                      editable: isEditable,
+                      editable: isEditable && isSupervisor,
                   }
                 : {},
         ]

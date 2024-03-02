@@ -14,6 +14,8 @@ export default function GradeSelfHistory() {
             name: item.name,
             key: item._id,
             created_at: timeSince(new Date(item.created_at)),
+            total_self_point: item.total_self_point,
+            total_supervisor_point: item.total_supervisor_point,
         }
     })
 

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { ArrowRightOutlined } from "@ant-design/icons"
+import checkRank from "../../utils/checkRank"
 
 const columns = [
     {
@@ -16,13 +17,27 @@ const columns = [
         title: "Điểm tự chấm",
         dataIndex: "total_self_point",
         key: "self_point",
-        width: "15%",
+        width: "10%",
     },
     {
         title: "Điểm tổ chuyên môn",
         dataIndex: "total_supervisor_point",
         key: "supervisor_point",
-        width: "15%",
+        width: "10%",
+    },
+    {
+        title: "Xếp loại dự kiến",
+        dataIndex: "rank",
+        key: "rank",
+        width: "10%",
+        align: "center",
+        render: (text, record, index) => (
+            <div>
+                {record.total_supervisor_point
+                    ? checkRank(record.total_supervisor_point)
+                    : checkRank(record.total_self_point)}
+            </div>
+        ),
     },
     {
         title: "Hành động",
@@ -31,7 +46,7 @@ const columns = [
         align: "center",
         render: (_, record) => {
             return (
-                <Link to={`/${record._id}`} className="action_link">
+                <Link to={`/${record.key}`} className="action_link">
                     Xem chi tiết <ArrowRightOutlined />
                 </Link>
             )

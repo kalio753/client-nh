@@ -10,6 +10,8 @@ import {
     calculateSectionSelfPoints,
     calculateSectionTotalPoints,
 } from "../../utils/calculatePoint"
+import generateExcel from "../../utils/generateExcel"
+import downloadImg from "../../images/download.svg"
 
 export default function GradeGeneralDetail() {
     const { gradeId, userId } = useParams()
@@ -38,6 +40,10 @@ export default function GradeGeneralDetail() {
         navigate("/grade")
     }
 
+    const handleGenerateExcel = () => {
+        generateExcel({ userName, header: `Giáo viên: ${userName}`, data: doc })
+    }
+
     return (
         <>
             <Breadcrumb
@@ -59,7 +65,27 @@ export default function GradeGeneralDetail() {
                 style={{ flex: 1 }}
             >
                 <div className="top_section">
-                    <h1 style={{ color: "black" }}>{doc?.name}</h1>
+                    <h1 style={{ color: "black", maxWidth: "80%" }}>
+                        {userName}
+                    </h1>
+
+                    <Button
+                        onClick={handleGenerateExcel}
+                        style={{
+                            display: "flex",
+                            gap: 8,
+                            alignItems: "center",
+                        }}
+                    >
+                        <img
+                            src={downloadImg}
+                            style={{
+                                width: 16,
+                                filter: "brightness(0) saturate(100%) invert(59%) sepia(98%) saturate(479%) hue-rotate(73deg) brightness(84%) contrast(95%)",
+                            }}
+                        />
+                        Download
+                    </Button>
                 </div>
 
                 <div className="divider"></div>

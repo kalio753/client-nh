@@ -6,6 +6,8 @@ import { SearchOutlined } from "@ant-design/icons"
 import columns from "./tableColumns"
 import { useParams } from "react-router-dom"
 import myAxios from "../../utils/axios"
+import downloadImg from "../../images/download.svg"
+import generateAllExcel from "../../utils/generateAllExcel"
 
 export default function GeneralUser() {
     const { docId } = useParams()
@@ -20,7 +22,15 @@ export default function GeneralUser() {
         fetchMyContextData()
         async function fetchData() {
             const res = await myAxios.get(`/grade/doc/${docId}`)
-            setTableData(res.data.data)
+            setTableData(
+                res.data.data.map((item) => ({
+                    owner: item.owner,
+                    dept_id: item.dept_id,
+                    key: item._id,
+                    total_self_point: item.total_self_point,
+                    total_supervisor_point: item.total_supervisor_point,
+                })),
+            )
             const titleRes = await myAxios.get(`docs/${docId}`)
             setTitle(titleRes.data.data.name)
         }
@@ -49,6 +59,9 @@ export default function GeneralUser() {
             }),
         )
     }
+    const handleGenerateExcel = () => {
+        generateAllExcel({ data: tableData })
+    }
 
     return (
         <div>
@@ -66,34 +79,62 @@ export default function GeneralUser() {
             >
                 <h1 style={{ color: "black" }}>{title}</h1>
 
-                <div className="search_section">
-                    <Input
-                        placeholder="Tên giáo viên"
-                        value={searchInput}
-                        onChange={(e) => {
-                            setSearchInput(e.target.value)
-                            if (!e.target.value) {
-                                setSearchData(null)
-                            } else {
-                                setSearchData(
-                                    tableData.filter((user) =>
-                                        convertVietnamese(
-                                            user.user_name,
-                                        ).includes(
-                                            convertVietnamese(e.target.value),
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
+                    <div className="search_section">
+                        <Input
+                            placeholder="Tên giáo viên"
+                            value={searchInput}
+                            onChange={(e) => {
+                                setSearchInput(e.target.value)
+                                if (!e.target.value) {
+                                    setSearchData(null)
+                                } else {
+                                    setSearchData(
+                                        tableData.filter((user) =>
+                                            convertVietnamese(
+                                                user.user_name,
+                                            ).includes(
+                                                convertVietnamese(
+                                                    e.target.value,
+                                                ),
+                                            ),
                                         ),
-                                    ),
-                                )
-                            }
-                        }}
-                    />
+                                    )
+                                }
+                            }}
+                        />
+                        <Button
+                            type="primary"
+                            icon={<SearchOutlined />}
+                            size="large"
+                            onClick={handleSearch}
+                        >
+                            Tìm kiếm
+                        </Button>
+                    </div>
+
                     <Button
-                        type="primary"
-                        icon={<SearchOutlined />}
-                        size="large"
-                        onClick={handleSearch}
+                        onClick={handleGenerateExcel}
+                        style={{
+                            display: "flex",
+                            gap: 8,
+                            alignItems: "center",
+                        }}
                     >
-                        Tìm kiếm
+                        <img
+                            src={downloadImg}
+                            style={{
+                                width: 16,
+                                filter: "brightness(0) saturate(100%) invert(59%) sepia(98%) saturate(479%) hue-rotate(73deg) brightness(84%) contrast(95%)",
+                            }}
+                        />
+                        Download
                     </Button>
                 </div>
 

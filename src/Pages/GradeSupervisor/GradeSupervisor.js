@@ -144,7 +144,7 @@ export default function GradeSupervisor() {
                 style={{ flex: 1 }}
             >
                 <div className="top_section">
-                    <h1 style={{ color: "black" }}>{doc?.name}</h1>
+                    <h1 style={{ color: "black" }}>{userName}</h1>
                 </div>
 
                 <div className="divider"></div>

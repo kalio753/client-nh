@@ -7,21 +7,17 @@
 
     .search_section {
         display: flex;
+        gap: 8px;
+        width: 35%;
 
         input {
-            width: 25%;
-            margin-right: 8px;
+            width: 100%;
         }
     }
     .table_section {
         margin-top: 16px;
         .ant-table {
             border-radius: 8px;
-
-            .ant-table-thead > tr > th {
-                // background: #ccc;
-                // color: #fff;
-            }
 
             .action_link {
                 color: #53c100;

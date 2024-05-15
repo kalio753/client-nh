@@ -10,60 +10,26 @@ import { useMyContext } from "../../hooks/myContext"
 
 export default function GradeSessionList() {
     const currUser = decodeJWT(getCookie("token")).data
-    const { user_dict, user_list, role_dict, fetchMyContextData } =
-        useMyContext()
+    const { user_dict, user_list, fetchMyContextData } = useMyContext()
     const [doc, setDoc] = useState()
     const [tableData, setTableData] = useState([])
 
-    const isTTCM = currUser.role_id
-        .map((role) => role_dict[role])
-        .includes("Tổ trưởng chuyên môn")
+    // doc?.filter((item) => {
+    //     const owner = user_list.filter((user) => user._id === item.owner)
 
-    console.log("doc ne ", doc)
-    console.log("currUser ne ", currUser)
+    //     return owner.department_id === currUser.department_id
+    // })
+
     useEffect(() => {
         fetchMyContextData()
-    }, [])
 
-    useEffect(() => {
-        setTableData(
-            isTTCM
-                ? doc
-                      ?.filter((item) => {
-                          console.log("user_list", user_list)
-                          const owner = user_list.filter(
-                              (user) => user._id === item.owner,
-                          )[0]
-                          console.log(owner, currUser)
-                          return owner.department_id === currUser.department_id
-                      })
-                      ?.map((item) => {
-                          return {
-                              name: item.name,
-                              key: item._id,
-                              year: timeSince(new Date(item.created_at)),
-                              owner: user_dict[item.owner],
-                          }
-                      })
-                : doc?.map((item) => {
-                      return {
-                          name: item.name,
-                          key: item._id,
-                          year: timeSince(new Date(item.created_at)),
-                          owner: user_dict[item.owner],
-                      }
-                  }),
-        )
-    }, [user_list])
-
-    useEffect(() => {
         async function fetchData() {
             try {
                 const res = await myAxios.post(`grade/supervisor`, {
                     user_id: currUser._id,
                     role_list: currUser.role_id,
+                    dept_id: currUser.department_id,
                 })
-                console.log(res)
                 res.status === 200 ? setDoc(res.data.data) : null
             } catch (error) {
                 console.log(error)
@@ -71,6 +37,19 @@ export default function GradeSessionList() {
         }
         fetchData()
     }, [])
+
+    useEffect(() => {
+        setTableData(
+            doc?.map((item) => {
+                return {
+                    name: item.name,
+                    key: item._id,
+                    year: timeSince(new Date(item.created_at)),
+                    owner: user_dict[item.owner],
+                }
+            }),
+        )
+    }, [user_list])
 
     return (
         <>

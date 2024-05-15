@@ -15,17 +15,17 @@ export default function GeneralUser() {
     const [tableData, setTableData] = useState([])
     const [searchData, setSearchData] = useState()
     const [title, setTitle] = useState("")
-    const { user_list, dept_list, fetchMyContextData, dept_dict, user_dict } =
-        useMyContext()
+    const { fetchMyContextData, dept_dict, user_dict } = useMyContext()
 
     useEffect(() => {
         fetchMyContextData()
         async function fetchData() {
             const res = await myAxios.get(`/grade/doc/${docId}`)
+
             setTableData(
                 res.data.data.map((item) => ({
-                    owner: item.owner,
-                    dept_id: item.dept_id,
+                    user_name: user_dict[item.owner],
+                    dept_name: dept_dict[item.dept_id],
                     key: item._id,
                     total_self_point: item.total_self_point,
                     total_supervisor_point: item.total_supervisor_point,
@@ -38,17 +38,17 @@ export default function GeneralUser() {
     }, [])
     console.log("aba", tableData)
 
-    useEffect(() => {
-        setTableData((prev) => {
-            return prev.map((item) => {
-                return {
-                    ...item,
-                    user_name: user_dict[item.owner],
-                    dept_name: dept_dict[item.dept_id],
-                }
-            })
-        })
-    }, [user_list, dept_list])
+    // useEffect(() => {
+    //     setTableData((prev) => {
+    //         return prev.map((item) => {
+    //             return {
+    //                 ...item,
+    //                 user_name: user_dict[item.owner],
+    //                 dept_name: dept_dict[item.dept_id],
+    //             }
+    //         })
+    //     })
+    // }, [user_list, dept_list])
 
     const handleSearch = () => {
         setSearchData(

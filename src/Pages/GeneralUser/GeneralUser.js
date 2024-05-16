@@ -15,10 +15,9 @@ export default function GeneralUser() {
     const [tableData, setTableData] = useState([])
     const [searchData, setSearchData] = useState()
     const [title, setTitle] = useState("")
-    const { fetchMyContextData, dept_dict, user_dict } = useMyContext()
+    const { dept_dict, user_dict } = useMyContext()
 
     useEffect(() => {
-        fetchMyContextData()
         async function fetchData() {
             const res = await myAxios.get(`/grade/doc/${docId}`)
 
@@ -36,7 +35,7 @@ export default function GeneralUser() {
         }
         fetchData()
     }, [])
-    console.log("aba", tableData)
+    // console.log("aba", tableData)
 
     // useEffect(() => {
     //     setTableData((prev) => {

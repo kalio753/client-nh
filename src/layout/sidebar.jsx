@@ -60,6 +60,9 @@ const Sidebar = () => {
 
     const currUser = decodeJWT(getCookie("token")).data
     const roleRankList = [currUser.role_id.map((item) => roleIdToRank[item])]
+    const isGVien = roleRankList[0].includes(12)
+    const isGiamThiAndGiaoVien =
+        roleRankList[0].includes(12) && roleRankList[0].includes(10)
     // console.log("Sidebar: currUser", currUser)
     // console.log("Sidebar: rank list", roleRankList)
     const items = [
@@ -74,13 +77,16 @@ const Sidebar = () => {
             getItem("Chấm điểm", "5"),
             getItem("Lịch sử", "6"),
         ]),
-        !roleRankList[0].includes(12) ||
-            (roleRankList[0].includes(12) &&
-                roleRankList[0].includes(10) &&
-                getItem("Công việc của tôi", "sub3", <FormOutlined />, [
-                    getItem("Chấm điểm", "7"),
-                    getItem("Lịch sử", "8"),
-                ])),
+        !isGVien &&
+            getItem("Công việc của tôi", "sub3", <FormOutlined />, [
+                getItem("Chấm điểm", "7"),
+                getItem("Lịch sử", "8"),
+            ]),
+        isGiamThiAndGiaoVien &&
+            getItem("Công việc của tôi", "sub3", <FormOutlined />, [
+                getItem("Chấm điểm", "7"),
+                getItem("Lịch sử", "8"),
+            ]),
         getItem("Đổi mật khẩu", "9", <LockOutlined />),
         getItem("Đăng xuất", "10"),
     ]

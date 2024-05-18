@@ -69,13 +69,7 @@ export default function DocumentContentSection({
                                                 {docItem.title}
                                             </h2>{" "}
                                             <span>
-                                                (
-                                                <b>
-                                                    {calculateSectionTotalPoints(
-                                                        doc,
-                                                        index,
-                                                    )}
-                                                </b>{" "}
+                                                (<b>{docItem.total_point}</b>{" "}
                                                 Điểm)
                                             </span>
                                         </div>

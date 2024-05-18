@@ -77,16 +77,22 @@ const Sidebar = () => {
             getItem("Chấm điểm", "5"),
             getItem("Lịch sử", "6"),
         ]),
-        !isGVien &&
+        roleRankList[0].includes(12) &&
+            roleRankList[0].length > 1 &&
             getItem("Công việc của tôi", "sub3", <FormOutlined />, [
                 getItem("Chấm điểm", "7"),
                 getItem("Lịch sử", "8"),
             ]),
-        isGiamThiAndGiaoVien &&
+        !roleRankList[0].includes(12) &&
             getItem("Công việc của tôi", "sub3", <FormOutlined />, [
                 getItem("Chấm điểm", "7"),
                 getItem("Lịch sử", "8"),
             ]),
+        // isGiamThiAndGiaoVien &&
+        //     getItem("Công việc của tôi", "sub3", <FormOutlined />, [
+        //         getItem("Chấm điểm", "7"),
+        //         getItem("Lịch sử", "8"),
+        //     ]),
         getItem("Đổi mật khẩu", "9", <LockOutlined />),
         getItem("Đăng xuất", "10"),
     ]

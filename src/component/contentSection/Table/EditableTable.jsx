@@ -14,14 +14,24 @@ export default function EditableTable({
 
     const handleSave = (record) => {
         setDocument((prev) => {
-            const section = prev.section.map((item) => {
+            const section = prev.section.map((item, index) => {
                 const newContent = item.content.map((ele) =>
                     ele.key === record.key ? record : ele,
                 )
-                const sectionTotalPoint = item.content.reduce(
+                let sectionTotalPoint = item.content.reduce(
                     (acc, ele) => acc + ele.point,
                     0,
                 )
+                // Temporary Logics : MUST BE DELETED IN THE FUTURE
+                if (index === 1 && sectionTotalPoint > 75)
+                    sectionTotalPoint = 75
+
+                if (index === 3 && sectionTotalPoint > 10)
+                    sectionTotalPoint = 10
+
+                console.log(index, sectionTotalPoint)
+
+                // End temporary Logics
                 return {
                     ...item,
                     content: newContent,

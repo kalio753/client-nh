@@ -11,7 +11,6 @@ import getCookie from "../../utils/getCookie"
 import { formatedDate, isDateExpired } from "../../utils/dateFormat"
 import {
     calculateSectionSelfPoints,
-    calculateSectionTotalPoints,
     calculateTotalPoint,
 } from "../../utils/calculatePoint"
 
@@ -79,7 +78,6 @@ export default function GradeSelf() {
                 },
                 0,
             )
-            console.log("total_self_point", total_self_point)
 
             let response
             if (!location.pathname.includes("history")) {
@@ -173,14 +171,7 @@ export default function GradeSelf() {
                                                 doc,
                                                 index,
                                             )}
-                                            /
-                                            <b>
-                                                {calculateSectionTotalPoints(
-                                                    doc,
-                                                    index,
-                                                )}
-                                            </b>{" "}
-                                            Điểm)
+                                            /<b>{docItem.total_point}</b> Điểm)
                                         </span>
                                     </div>
                                 </div>

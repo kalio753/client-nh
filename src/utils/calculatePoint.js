@@ -8,22 +8,35 @@ export const calculateSectionTotalPoints = (doc, index) => {
 }
 
 export const calculateSectionSelfPoints = (doc, index) => {
-    const total_point = doc?.section[index]?.content.reduce(
+    let sectionPoint = doc?.section[index]?.content.reduce(
         (acc, content) => (content.self_point ? acc + content.self_point : acc),
         0,
     )
 
-    return total_point && total_point > 0 ? total_point : 0
+    const totalPoint = doc?.section[index]?.total_point
+
+    console.log("bubu", doc?.section[index])
+    if (totalPoint < sectionPoint) {
+        sectionPoint = totalPoint
+    }
+
+    return sectionPoint && sectionPoint > 0 ? sectionPoint : 0
 }
 
 export const calculateSectionSupervisorPoints = (doc, index) => {
-    const total_point = doc?.section[index]?.content.reduce(
+    const sectionPoint = doc?.section[index]?.content.reduce(
         (acc, content) =>
             content.supervisor_point ? acc + content.supervisor_point : acc,
         0,
     )
 
-    return total_point && total_point > 0 ? total_point : 0
+    const totalPoint = doc?.section[index]?.total_point
+
+    if (totalPoint < sectionPoint) {
+        sectionPoint = totalPoint
+    }
+
+    return sectionPoint && sectionPoint > 0 ? sectionPoint : 0
 }
 
 export const calculateTotalPoint = (doc, type = "SELF") => {

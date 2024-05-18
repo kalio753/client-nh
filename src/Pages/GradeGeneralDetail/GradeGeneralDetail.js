@@ -107,14 +107,7 @@ export default function GradeGeneralDetail() {
                                                 doc,
                                                 index,
                                             )}
-                                            /
-                                            <b>
-                                                {calculateSectionTotalPoints(
-                                                    doc,
-                                                    index,
-                                                )}
-                                            </b>{" "}
-                                            Điểm)
+                                            /<b>{docItem.total_point}</b> Điểm)
                                         </span>
                                     </div>
                                 </div>

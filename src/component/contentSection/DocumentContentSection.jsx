@@ -6,7 +6,6 @@ import intToRoman from "../../utils/intToRoman"
 import "./contentSection.scss"
 import myAxios from "../../utils/axios"
 import { useMyContext } from "../../hooks/myContext"
-import { calculateSectionTotalPoints } from "../../utils/calculatePoint"
 
 export default function DocumentContentSection({
     doc,

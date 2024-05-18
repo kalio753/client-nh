@@ -24,7 +24,7 @@ export const calculateSectionSelfPoints = (doc, index) => {
 }
 
 export const calculateSectionSupervisorPoints = (doc, index) => {
-    const sectionPoint = doc?.section[index]?.content.reduce(
+    let sectionPoint = doc?.section[index]?.content.reduce(
         (acc, content) =>
             content.supervisor_point ? acc + content.supervisor_point : acc,
         0,

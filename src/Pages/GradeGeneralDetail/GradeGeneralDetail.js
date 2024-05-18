@@ -6,10 +6,7 @@ import PopUpModal from "../../component/modals/PopUpModal"
 import intToRoman from "../../utils/intToRoman"
 import GradeTable from "../../component/gradeTable/GradeTable"
 import { useMyContext } from "../../hooks/myContext"
-import {
-    calculateSectionSelfPoints,
-    calculateSectionTotalPoints,
-} from "../../utils/calculatePoint"
+import { calculateSectionSelfPoints } from "../../utils/calculatePoint"
 import generateExcel from "../../utils/generateExcel"
 import downloadImg from "../../images/download.svg"
 

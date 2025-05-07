@@ -113,8 +113,6 @@ export default function DocCreate() {
                 placement: "top",
             })
         }
-
-        console.log(doc)
     }
 
     return (

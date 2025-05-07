@@ -11,7 +11,6 @@ const ProtectedRoute = () => {
         isExpired = true
     } else {
         const decodedToken = decodeJWT(token)
-        console.log(decodedToken)
         isExpired = tokenIsExpired(decodedToken)
     }
     if (isExpired) {

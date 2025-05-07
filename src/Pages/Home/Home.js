@@ -10,7 +10,6 @@ import myAxios from "../../utils/axios"
 function Home() {
     const [searchInput, setSearchInput] = useState("")
     const [doc, setDoc] = useState([])
-    console.log(doc)
     const tableData = doc?.map((item) => {
         return {
             name: item.name,

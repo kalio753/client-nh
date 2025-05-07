@@ -20,7 +20,6 @@ export default function UserDetail() {
     const [isLoading, setIsLoading] = useState(false)
 
     const currUser = user_list.filter((user) => user._id === userId)[0]
-    console.log("ababa", currUser)
 
     if (currUser) {
         currUser.department = currUser.department_id

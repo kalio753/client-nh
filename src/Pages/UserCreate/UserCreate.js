@@ -13,8 +13,6 @@ export default function UserCreate() {
     const [isLoading, setIsLoading] = useState(false)
 
     const onFinish = async (values) => {
-        console.log("Success:", values)
-
         setIsLoading(true)
         const res = await myAxios.post("user/signup", {
             ...values,
@@ -104,7 +102,6 @@ export default function UserCreate() {
                             },
                             {
                                 validator: (_, value) => {
-                                    console.log(value)
                                     return validatePhoneNumber(value)
                                         ? Promise.resolve()
                                         : Promise.reject(

@@ -143,7 +143,6 @@ export default async function generateAlllExcel({ data }) {
             colNumber <= worksheet.columnCount;
             colNumber++
         ) {
-            console.log(worksheet.getRow("b", colNumber))
             worksheet.getCell(rowNumber, colNumber).border = BORDER_ROUND
         }
     }

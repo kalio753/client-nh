@@ -27,7 +27,6 @@ export default function GradeSupervisor() {
     const [isLoading, setisLoading] = useState(false)
 
     const [doc, setDocument] = useState()
-    console.log("doc", doc)
     const isEditable = !isDateExpired(doc?.supervisor_expired)
     const userName = user_dict[doc?.owner]
 

@@ -16,7 +16,6 @@ export default function ContentAddModal({
     const [criteria, setCriteria] = useState([{}])
     const [supervisor, setSupervisor] = useState("")
 
-    // console.log("res here", criteria)
     const handleContentModalOk = () => {
         let isCriteriaEmpty = false
         criteria.forEach((item) => {
@@ -65,7 +64,6 @@ export default function ContentAddModal({
     }
 
     const handleChange = (value) => {
-        console.log(`selected ${value}`)
         setSupervisor(value)
     }
 

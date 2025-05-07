@@ -17,7 +17,6 @@ export const MyContextProvider = ({ children }) => {
 
     const fetchMyContextData = async () => {
         try {
-            console.log("fetching data from my custom context")
             const userResponse = await myAxios.get("user/get_all")
             const roleResponse = await myAxios.get("role")
             const deptResponse = await myAxios.get("dept")

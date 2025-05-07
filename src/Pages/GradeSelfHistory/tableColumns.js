@@ -51,7 +51,6 @@ const columns = [
         width: "10%",
         align: "center",
         render: (_, record) => {
-            console.log(record)
             return (
                 <Link
                     to={`/grade/history/${record.key}`}

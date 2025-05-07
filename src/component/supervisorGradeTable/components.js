@@ -43,7 +43,6 @@ const EditableCell = ({
     const save = async () => {
         try {
             const values = await form.validateFields()
-            console.log("values", values)
             toggleEdit()
             handleSave({
                 ...record,

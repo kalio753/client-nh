@@ -40,7 +40,6 @@ const EditableCell = ({
     const save = async () => {
         try {
             const values = await form.validateFields()
-            console.log("gradeTable Component:", values)
             toggleEdit()
             handleSave({
                 ...record,
@@ -52,7 +51,6 @@ const EditableCell = ({
                 ...record,
                 self_point: undefined,
             })
-            console.log("Save failed:", errInfo)
         }
     }
     let childNode = children

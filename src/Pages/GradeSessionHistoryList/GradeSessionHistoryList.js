@@ -32,7 +32,6 @@ export default function GradeSessionHistoryList() {
                     user_id,
                     is_history: true,
                 })
-                console.log(res.data.data)
                 res.status === 200 ? setDoc(res.data.data) : null
             } catch (error) {
                 console.log(error)

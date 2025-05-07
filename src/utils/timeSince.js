@@ -14,6 +14,3 @@ export default function timeSince(date) {
     }
     return Math.floor(seconds) + " giây trước"
 }
-
-// console.log(timeSince(new Date("2023-12-25T08:31:00.448+0000")))
-console.log(new Date())

@@ -21,7 +21,6 @@ export default function GradeDocList() {
             try {
                 const user_id = decodeJWT(getCookie("token")).data._id
                 const res = await myAxios.get(`/docs/user/${user_id}`)
-                console.log(res)
                 res.status === 200 ? setDoc(res.data.data) : null
             } catch (error) {
                 console.log(error)

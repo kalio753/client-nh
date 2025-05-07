@@ -25,7 +25,6 @@ export default function GradeSelf() {
     const currUser = decodeJWT(getCookie("token")).data
 
     const [doc, setDocument] = useState()
-    console.log("doc ne", doc)
     const isEditable = !isDateExpired(doc?.self_expired)
 
     useEffect(() => {

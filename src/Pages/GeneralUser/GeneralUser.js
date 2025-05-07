@@ -34,7 +34,7 @@ export default function GeneralUser() {
             setTitle(titleRes.data.data.name)
         }
         fetchData()
-    }, [])
+    }, [dept_dict, user_dict])
     // console.log("aba", tableData)
 
     // useEffect(() => {

@@ -63,8 +63,6 @@ const Sidebar = () => {
     const isGVien = roleRankList[0].includes(12)
     const isGiamThiAndGiaoVien =
         roleRankList[0].includes(12) && roleRankList[0].includes(10)
-    // console.log("Sidebar: currUser", currUser)
-    // console.log("Sidebar: rank list", roleRankList)
     const items = [
         roleRankList[0].includes(0) &&
             getItem("Administrator", "sub1", <StarOutlined />, [
@@ -103,7 +101,6 @@ const Sidebar = () => {
     } = theme.useToken()
 
     function handleMenuItemClicked(e) {
-        console.log(e)
         const key = e.key
         switch (key) {
             case "1":

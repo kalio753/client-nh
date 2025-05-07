@@ -46,8 +46,6 @@ export default function DocDetail() {
         fetchData()
     }, [])
 
-    console.log(doc)
-
     const [isContentTitleModalOpen, setIsContentTitleModalOpen] =
         useState(false)
     const showContentTitleModal = () => {
@@ -104,7 +102,6 @@ export default function DocDetail() {
                 }, [])
             })
             const supervisor_list = [...new Set(nested_supervisor_list.flat())]
-            console.log("supervisor_list", supervisor_list)
             setisLoading(true)
             const response = await myAxios.post(`docs/update/${doc._id}`, {
                 ...doc,

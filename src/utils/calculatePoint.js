@@ -34,7 +34,12 @@ export const calculateSectionSupervisorPoints = (doc, index) => {
         0,
     )
 
-    const totalPoint = doc?.section[index]?.total_point
+    const docSection = doc?.section[index]
+    const totalPoint = docSection?.total_point
+
+    if (docSection.is_total) {
+        sectionPoint = totalPoint + sectionPoint
+    }
 
     if (totalPoint < sectionPoint) {
         sectionPoint = totalPoint

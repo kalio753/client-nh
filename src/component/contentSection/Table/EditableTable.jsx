@@ -63,7 +63,6 @@ export default function EditableTable({
     const expandTableRow = (key) => {
         setCount(count + 1)
         const newSection = doc.section.map((section) => {
-            console.log("section neeee", section)
             section.content.map((content) => {
                 if (content.key === key) {
                     return {

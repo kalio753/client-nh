@@ -1,9 +1,10 @@
 const defaultDoc = {
-    name: "Phiếu đánh giá thi đua cá nhân giáo viên năm 2023 - 2024",
+    name: "Phiếu đánh giá thi đua cá nhân giáo viên năm 2024 - 2025 (Test)",
     section: [
         {
             title: "Tư tưởng chính trị",
             total_point: 15,
+            is_total: true,
             content: [
                 {
                     key: 0,

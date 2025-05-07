@@ -12,7 +12,6 @@ import SupervisorGradeTable from "../../component/supervisorGradeTable/Superviso
 import { useMyContext } from "../../hooks/myContext"
 import { formatedDate, isDateExpired } from "../../utils/dateFormat"
 import {
-    calculateSectionSelfPoints,
     calculateSectionSupervisorPoints,
     calculateTotalPoint,
 } from "../../utils/calculatePoint"
@@ -192,7 +191,15 @@ export default function GradeSupervisor() {
                 </div>
 
                 <h2 className="total_point">
-                    Tổng điểm: {calculateTotalPoint(doc, "SUPERVISOR")}{" "}
+                    Tổng điểm cá nhân: {calculateTotalPoint(doc)}
+                </h2>
+
+                <h2
+                    className="total_point"
+                    style={{ marginTop: 8, textDecoration: "underline" }}
+                >
+                    Tổng điểm chính thức:{" "}
+                    {calculateTotalPoint(doc, "SUPERVISOR")}
                 </h2>
 
                 <div className="action_section">

@@ -27,7 +27,7 @@ const EditableCell = ({
 }) => {
     const [editing, setEditing] = useState(false)
     const selectData = roles
-        ?.filter((role) => role.rank > 0)
+        // ?.filter((role) => role.rank > 0)
         ?.map((role) => {
             return { label: role.name, value: role._id }
         })

@@ -18,18 +18,22 @@ export default function EditableTable({
                 const newContent = item.content.map((ele) =>
                     ele.key === record.key ? record : ele,
                 )
-                let sectionTotalPoint = item.content.reduce(
-                    (acc, ele) => acc + ele.point,
-                    0,
-                )
-                // Temporary Logics : MUST BE DELETED IN THE FUTURE
-                if (index === 1 && sectionTotalPoint > 75)
-                    sectionTotalPoint = 75
+                let sectionTotalPoint = 0
 
-                if (index === 3 && sectionTotalPoint > 10)
-                    sectionTotalPoint = 10
+                if (item.is_total) {
+                    sectionTotalPoint = item.total_point
+                } else {
+                    sectionTotalPoint = item.content.reduce(
+                        (acc, ele) => acc + ele.point,
+                        0,
+                    )
+                    // Temporary Logics : MUST BE DELETED IN THE FUTURE
+                    if (index === 1 && sectionTotalPoint > 75)
+                        sectionTotalPoint = 75
 
-                console.log(index, sectionTotalPoint)
+                    if (index === 3 && sectionTotalPoint > 10)
+                        sectionTotalPoint = 10
+                }
 
                 // End temporary Logics
                 return {
@@ -77,7 +81,6 @@ export default function EditableTable({
             return section
             // })
         })
-        console.log("newSection", newSection)
         setDocument((prev) => {
             return { ...prev, section: newSection }
         })

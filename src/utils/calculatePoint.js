@@ -13,9 +13,13 @@ export const calculateSectionSelfPoints = (doc, index) => {
         0,
     )
 
-    const totalPoint = doc?.section[index]?.total_point
+    const docSection = doc?.section[index]
+    const totalPoint = docSection?.total_point
 
-    console.log("bubu", doc?.section[index])
+    if (docSection.is_total) {
+        sectionPoint = totalPoint + sectionPoint
+    }
+
     if (totalPoint < sectionPoint) {
         sectionPoint = totalPoint
     }

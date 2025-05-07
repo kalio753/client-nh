@@ -1,10 +1,9 @@
-import { Button, Popconfirm } from "antd"
+import { Button, Checkbox, InputNumber, Popconfirm } from "antd"
 import React, { useEffect, useState } from "react"
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons"
 import EditableTable from "./Table/EditableTable"
 import intToRoman from "../../utils/intToRoman"
 import "./contentSection.scss"
-import myAxios from "../../utils/axios"
 import { useMyContext } from "../../hooks/myContext"
 
 export default function DocumentContentSection({
@@ -14,6 +13,9 @@ export default function DocumentContentSection({
     setCount,
 }) {
     const [roles, setRoles] = useState(role_list)
+    const [_, setTick] = useState(0)
+    const forceUpdate = () => setTick((t) => t + 1)
+
     const { role_list } = useMyContext()
     useEffect(() => {
         setRoles(role_list)
@@ -46,9 +48,14 @@ export default function DocumentContentSection({
             const newSection = prev.section.filter(
                 (section, sectionIndex) => sectionIndex !== index,
             )
-            console.log(newSection)
             return { ...prev, section: newSection }
         })
+    }
+
+    const onCheckBoxChange = (e, docItem) => {
+        if (e.target.checked) docItem.is_total = e.target.checked
+        else delete docItem.is_total
+        forceUpdate()
     }
 
     return (
@@ -68,9 +75,33 @@ export default function DocumentContentSection({
                                                 {docItem.title}
                                             </h2>{" "}
                                             <span>
-                                                (<b>{docItem.total_point}</b>{" "}
+                                                (
+                                                {docItem.is_total ? (
+                                                    <InputNumber
+                                                        defaultValue={
+                                                            docItem.total_point ||
+                                                            0
+                                                        }
+                                                        onChange={(value) => {
+                                                            docItem.total_point =
+                                                                value
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <b>{docItem.total_point}</b>
+                                                )}{" "}
                                                 Điểm)
                                             </span>
+                                            <Checkbox
+                                                onChange={(e) =>
+                                                    onCheckBoxChange(e, docItem)
+                                                }
+                                                defaultChecked={
+                                                    docItem.is_total
+                                                }
+                                            >
+                                                Điểm tổng
+                                            </Checkbox>
                                         </div>
                                         <div>
                                             <Button

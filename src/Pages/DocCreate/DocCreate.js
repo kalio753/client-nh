@@ -22,7 +22,6 @@ export default function DocCreate() {
     const [supervisorExpired, setSupervisorExpired] = useState("")
 
     const [doc, setDocument] = useState(defaultDoc)
-    console.log("doc ne", doc)
 
     const [isContentTitleModalOpen, setIsContentTitleModalOpen] =
         useState(false)

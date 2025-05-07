@@ -6,7 +6,10 @@ import PopUpModal from "../../component/modals/PopUpModal"
 import intToRoman from "../../utils/intToRoman"
 import GradeTable from "../../component/gradeTable/GradeTable"
 import { useMyContext } from "../../hooks/myContext"
-import { calculateSectionSelfPoints } from "../../utils/calculatePoint"
+import {
+    calculateSectionSelfPoints,
+    calculateTotalPoint,
+} from "../../utils/calculatePoint"
 import generateExcel from "../../utils/generateExcel"
 import downloadImg from "../../images/download.svg"
 
@@ -18,9 +21,7 @@ export default function GradeGeneralDetail() {
     const { user_list, user_dict } = useMyContext()
 
     const [doc, setDocument] = useState()
-    console.log("doc ne", doc)
     const userName = user_dict[doc?.owner]
-    console.log(userName)
 
     useEffect(() => {
         async function fetchData() {
@@ -124,6 +125,18 @@ export default function GradeGeneralDetail() {
                         )
                     })}
                 </div>
+
+                <h2 className="total_point">
+                    Tổng điểm cá nhân: {calculateTotalPoint(doc)}
+                </h2>
+
+                <h2
+                    className="total_point"
+                    style={{ marginTop: 8, textDecoration: "underline" }}
+                >
+                    Tổng điểm chính thức:{" "}
+                    {calculateTotalPoint(doc, "SUPERVISOR")}
+                </h2>
 
                 <div className="action_section">
                     <Button block danger onClick={() => navigate(-1)}>
